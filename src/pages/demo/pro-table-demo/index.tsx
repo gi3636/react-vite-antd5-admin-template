@@ -15,7 +15,7 @@ const ProTableDemo: React.FC = () => {
   const loadDataSource = (param?) => {
     setLoading(true);
     const data = [] as any;
-    for (let i = 0; i < 46; i++) {
+    for (let i = 0; i < 60; i++) {
       data.push({
         key: i,
         name: `Edward King ${i}`,

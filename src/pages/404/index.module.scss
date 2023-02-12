@@ -1,0 +1,41 @@
+.container {
+  overflow: hidden;
+  height: 100vh;
+  background: url("@/assets/images/404.svg") no-repeat;
+  background-size: 100% 70%;
+  position: relative;
+
+  .box {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    position: absolute;
+    top: 70%;
+    left: 50%;
+    transform: translate(-50%, 0);
+    //transform: translateX(50%);
+
+    .title {
+      font-family: 'Rubik';
+      font-style: normal;
+      font-weight: 600;
+      font-size: 24px;
+      line-height: 34px;
+      /* identical to box height, or 200% */
+      text-align: center;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      color: #565872;
+    }
+
+    .returnBtn {
+      font-size: 16px;
+      height: 40px;
+      margin-top: 20px;
+      border-radius: 20px;
+    }
+
+
+  }
+
+}
