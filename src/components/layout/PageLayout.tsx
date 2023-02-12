@@ -5,6 +5,8 @@ import PageSider from '@/components/layout/sider/PageSider';
 import PageHeader from '@/components/layout/header/PageHeader';
 import PageContent from '@/components/layout/content/PageContent';
 import TabPage from '@/components/layout/tag/TabPage';
+import { LeftOutlined, MenuFoldOutlined, MenuUnfoldOutlined, RightOutlined } from '@ant-design/icons';
+
 function PageLayout() {
   const [collapsed, setCollapsed] = useState(false);
   const {
@@ -13,10 +15,16 @@ function PageLayout() {
   return (
     <Layout>
       <PageSider collapsed={collapsed} />
+
+      <div className='trigger' onClick={() => setCollapsed(!collapsed)} style={{ left: collapsed ? 65 : 185 }}>
+        {collapsed ? <RightOutlined /> : <LeftOutlined />}
+      </div>
       <Layout className='site-layout'>
-        <PageHeader collapsed={collapsed} setCollapsed={setCollapsed} colorBgContainer={colorBgContainer} />
-        <TabPage />
-        <PageContent colorBgContainer={colorBgContainer} />
+        <PageHeader />
+        <div style={{ display: 'flex', flexDirection: 'column', width: '100%' }}>
+          <TabPage />
+          <PageContent colorBgContainer={colorBgContainer} />
+        </div>
       </Layout>
     </Layout>
   );

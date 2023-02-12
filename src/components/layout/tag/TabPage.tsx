@@ -55,8 +55,8 @@ const TabPage: React.FC = () => {
     <div>
       <Tabs
         style={{
-          margin: '0 16px',
-          marginTop: 10,
+          margin: '0 20px',
+          marginTop: 20,
         }}
         hideAdd
         onEdit={(targetKey, action) => {

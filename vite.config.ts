@@ -45,6 +45,9 @@ export default defineConfig({
       less: {
         javascriptEnabled: true,
       },
+      scss: {
+        additionalData: '@import "@/styles/global.scss";@import "@/styles/animations.scss";',
+      },
     },
   },
 });

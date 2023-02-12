@@ -1,0 +1,111 @@
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  width: 100vw;
+  background: white;
+
+  .logo{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    will-change: filter;
+    transition: filter 300ms;
+    filter: drop-shadow(0 0 2em $primary-color);
+  }
+  .box {
+    z-index: 10;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+
+    .right {
+      position: relative;
+      background: url("@/assets/images/login-bg.png") no-repeat center;
+      background-size: contain;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 55%;
+      height: 90%;
+      margin: 30px;
+      opacity: 0.91;
+      z-index: 1;
+      .bg{
+        z-index: -1;
+        border-radius: 50%;
+        box-shadow: 0 0 10vh 18vw  rgba($primary-color, 0.15);
+      }
+    }
+
+    .left {
+      width: 45%;
+      display: flex;
+      justify-content: flex-start;
+      align-items: center;
+      margin-left: 5%;
+      height: 100%;
+      background: rgba($primary-color, 0.1);
+      .loginContainer {
+        background: white;
+        margin-left: 100px;
+        padding: 30px;
+        width: 400px;
+        height: 450px;
+        border-radius: 10px;
+        min-height: 300px;
+        box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.1);
+
+        .title {
+          color:$primary-color;
+          font-size: 30px;
+          font-weight: 600;
+          padding: 20px 0;
+          text-align: left;
+          filter: drop-shadow(0px 4px 4px rgba($primary-color, 0.3));
+        }
+        .welcome{
+          font-size: 15px;
+          line-height: 22px;
+          letter-spacing: 0.03em;
+          color: rgba(0, 0, 0, 0.5);
+        }
+        .form{
+          margin-top: 20px;
+          :global{
+            .ant-form-item-control-input-content{
+              height: 40px;
+            }
+            .ant-input-affix-wrapper{
+              height: 100%;
+            }
+          }
+          input{
+            height: 100%;
+            font-size: 16px;
+          }
+
+        }
+
+        .submitBtn{
+          font-size: 16px;
+          width: 100%;
+          height: 40px;
+        }
+      }
+
+    }
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .logo {
+    animation: logo-spin infinite 20s linear;
+  }
+}

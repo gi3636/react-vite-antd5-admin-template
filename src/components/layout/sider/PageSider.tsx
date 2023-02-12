@@ -4,7 +4,7 @@ import { findMenu, generateMenu, handleSortMenu, menus } from '@/route/menu';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { addTabHistory } from '@/store/tab/slice';
 import { useDispatch, useSelector } from '@/store';
-
+import logo from '@/assets/images/logo.svg';
 const { Sider } = Layout;
 
 function PageSider({ collapsed }) {
@@ -81,7 +81,12 @@ function PageSider({ collapsed }) {
 
   return (
     <Sider trigger={null} collapsible collapsed={collapsed}>
-      <div className='logo' />
+      {/*<div className='logo'>*/}
+      {/*  <img src={logo} alt='logo' width={30} height={30} />*/}
+      {/*  <span style={{ marginLeft: 5, transitionDelay: '1s', visibility: collapsed ? 'hidden' : 'visible' }}>*/}
+      {/*    管理后台*/}
+      {/*  </span>*/}
+      {/*</div>*/}
       <Menu
         theme='dark'
         mode='inline'

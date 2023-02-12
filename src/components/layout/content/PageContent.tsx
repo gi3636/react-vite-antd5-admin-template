@@ -10,12 +10,12 @@ function PageContent({ colorBgContainer }) {
   return (
     <Content
       style={{
-        margin: '0 16px',
+        margin: '0 20px',
         padding: 24,
         minHeight: 280,
         background: colorBgContainer,
       }}>
-      <KeepAlive include={['/demo/pro-table', '/']} keys={[]}></KeepAlive>
+      <KeepAlive></KeepAlive>
     </Content>
   );
 }

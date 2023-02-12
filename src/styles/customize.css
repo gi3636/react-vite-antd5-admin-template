@@ -12,8 +12,18 @@
     margin-bottom: 0;
 }
 
-.ant-tabs-tab{
-    border-bottom: 0;
+.ant-menu{
+    padding: 0 7px;
+}
+.ant-layout .ant-layout-header{
+    height: 55px;
+    background: #fff;
+    padding: 0 20px;
+    line-height: 0;
+}
+
+
+.ant-tabs-card >.ant-tabs-nav .ant-tabs-tab{
 }
 /*antd 水平线*/
 .ant-divider-horizontal{
