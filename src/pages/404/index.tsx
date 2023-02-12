@@ -13,9 +13,9 @@ const NotFound = () => {
           type={'primary'}
           className={styles.returnBtn}
           onClick={() => {
-            navigate('/');
+            navigate(-1);
           }}>
-          返回首页
+          返回上一页
         </Button>
       </div>
     </div>
