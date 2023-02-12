@@ -12,7 +12,6 @@ function PageContent({ colorBgContainer }) {
       style={{
         margin: '0 20px',
         padding: 24,
-        minHeight: 280,
         background: colorBgContainer,
       }}>
       <KeepAlive></KeepAlive>

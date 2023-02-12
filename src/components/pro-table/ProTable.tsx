@@ -11,7 +11,7 @@ export interface IProTableProps {
 const ProTable: React.FC<IProTableProps> = ({ tableProps, searchFields, onSearch }) => {
   let loading = !!tableProps?.loading;
   return (
-    <div>
+    <>
       <div
         style={{
           // border: '1px solid #f0f0f0',
@@ -20,8 +20,13 @@ const ProTable: React.FC<IProTableProps> = ({ tableProps, searchFields, onSearch
         }}>
         <SearchForm searchFields={searchFields} onFinish={onSearch} loading={loading} />
       </div>
-      <Table {...tableProps} />
-    </div>
+      <Table
+        {...tableProps}
+        scroll={{
+          x: 'max-content',
+        }}
+      />
+    </>
   );
 };
 

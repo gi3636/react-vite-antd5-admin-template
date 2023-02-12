@@ -1,7 +1,6 @@
 import { IField } from '@/components/search-form/SearchForm';
 import { Input } from 'antd';
 import React from 'react';
-import { placeholder } from '@babel/types';
 import { ColumnsType } from 'antd/es/table';
 
 export const columns: ColumnsType = [
@@ -15,6 +14,66 @@ export const columns: ColumnsType = [
   },
   {
     title: '测试dress',
+    dataIndex: 'address',
+  },
+  {
+    title: 'Name22',
+    dataIndex: 'name',
+  },
+  {
+    title: 'Age22',
+    dataIndex: 'age',
+  },
+  {
+    title: '测试dress22',
+    dataIndex: 'address',
+  },
+  {
+    title: 'Name11',
+    dataIndex: 'name',
+  },
+  {
+    title: 'Age11',
+    dataIndex: 'age',
+  },
+  {
+    title: '测试dress11',
+    dataIndex: 'address',
+  },
+  {
+    title: 'Name11',
+    dataIndex: 'name',
+  },
+  {
+    title: 'Age11',
+    dataIndex: 'age',
+  },
+  {
+    title: '测试dress11',
+    dataIndex: 'address',
+  },
+  {
+    title: 'Name11',
+    dataIndex: 'name',
+  },
+  {
+    title: 'Age11',
+    dataIndex: 'age',
+  },
+  {
+    title: '测试dress11',
+    dataIndex: 'address',
+  },
+  {
+    title: 'Name11',
+    dataIndex: 'name',
+  },
+  {
+    title: 'Age11',
+    dataIndex: 'age',
+  },
+  {
+    title: '测试dress11',
     dataIndex: 'address',
   },
 ];
