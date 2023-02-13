@@ -10,7 +10,6 @@ function PageContent({ colorBgContainer }) {
   return (
     <Content
       style={{
-        margin: '0 20px',
         padding: 24,
         background: colorBgContainer,
       }}>

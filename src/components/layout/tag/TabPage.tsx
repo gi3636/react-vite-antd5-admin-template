@@ -52,24 +52,18 @@ const TabPage: React.FC = () => {
   };
 
   return (
-    <div>
-      <Tabs
-        style={{
-          margin: '0 20px',
-          marginTop: 20,
-        }}
-        hideAdd
-        onEdit={(targetKey, action) => {
-          if (action === 'remove') {
-            remove(targetKey);
-          }
-        }}
-        onChange={onChange}
-        activeKey={activeKey}
-        type='editable-card'
-        items={items}
-      />
-    </div>
+    <Tabs
+      hideAdd
+      onEdit={(targetKey, action) => {
+        if (action === 'remove') {
+          remove(targetKey);
+        }
+      }}
+      onChange={onChange}
+      activeKey={activeKey}
+      type='editable-card'
+      items={items}
+    />
   );
 };
 

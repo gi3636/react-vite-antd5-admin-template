@@ -13,20 +13,23 @@ function PageLayout() {
     token: { colorBgContainer },
   } = theme.useToken();
   return (
-    <Layout>
-      <PageSider collapsed={collapsed} />
-
+    <div style={{ width: '100%' }}>
+      <PageHeader />
       <div className='trigger' onClick={() => setCollapsed(!collapsed)} style={{ left: collapsed ? 65 : 185 }}>
         {collapsed ? <RightOutlined /> : <LeftOutlined />}
       </div>
-      <Layout className='site-layout'>
-        <PageHeader />
-        <div style={{ display: 'flex', flexDirection: 'column', width: '100%' }}>
+      <Layout>
+        <PageSider collapsed={collapsed} />
+        <div
+          className='page-content'
+          style={{
+            width: collapsed ? 'calc(100% - 80px)' : 'calc(100% - 200px)',
+          }}>
           <TabPage />
           <PageContent colorBgContainer={colorBgContainer} />
         </div>
       </Layout>
-    </Layout>
+    </div>
   );
 }
 

@@ -12,4 +12,11 @@
 }
 
 
+.rightContainer {
+  display: flex;
+  margin-left: auto;
 
+  & > div {
+    margin-left: 10px;
+  }
+}

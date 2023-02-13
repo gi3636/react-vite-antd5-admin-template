@@ -3,6 +3,7 @@ import styles from './index.module.scss';
 import { Button, Form, Input } from 'antd';
 import { LockOutlined, UserOutlined } from '@ant-design/icons';
 import logo from '@/assets/images/logo.svg';
+import { globalConfig } from '@/globalConfig';
 
 const Login = () => {
   const onFinish = (values) => {
@@ -18,7 +19,7 @@ const Login = () => {
         </div>
         <div className={styles.left}>
           <div className={styles.loginContainer}>
-            <div className={styles.title}>代理后台</div>
+            <div className={styles.title}>{globalConfig.projectName}</div>
             <div className={styles.welcome}>欢迎回来!!!</div>
             <div>
               <Form className={styles.form} onFinish={onFinish}>

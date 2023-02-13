@@ -6,6 +6,7 @@ import { addTabHistory, setTabHistory } from '@/store/tab/slice';
 import { useDispatch, useSelector } from '@/store';
 import logo from '@/assets/images/logo.svg';
 import { useTranslation } from 'react-i18next';
+import { globalConfig } from '@/globalConfig';
 const { Sider } = Layout;
 
 function PageSider({ collapsed }) {
@@ -107,12 +108,12 @@ function PageSider({ collapsed }) {
   };
 
   return (
-    <Sider trigger={null} collapsible collapsed={collapsed}>
-      <div className='logo'>
-        <img src={logo} alt='logo' width={30} height={30} />
-      </div>
+    <Sider trigger={null} collapsible collapsed={collapsed} theme={globalConfig.initTheme.dark ? 'dark' : 'light'}>
+      {/*<div className='logo'>*/}
+      {/*  <img src={logo} alt='logo' width={30} height={30} />*/}
+      {/*</div>*/}
       <Menu
-        theme='dark'
+        theme={globalConfig.initTheme.dark ? 'dark' : 'light'}
         mode='inline'
         openKeys={openKeys}
         onOpenChange={onOpenChange}

@@ -5,7 +5,7 @@ import { LanguageType } from '@/type';
 import { useTranslation } from 'react-i18next';
 import styles from './index.module.scss';
 function ChangeLangBtn(props) {
-  const { t, i18n } = useTranslation();
+  const { i18n } = useTranslation();
   const locale = useMemo(() => {
     return i18n.resolvedLanguage;
   }, [i18n.resolvedLanguage]);
