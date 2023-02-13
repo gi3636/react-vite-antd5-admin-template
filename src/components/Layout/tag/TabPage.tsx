@@ -29,7 +29,6 @@ const TabPage: React.FC = () => {
 
   useEffect(() => {
     let tabHistory = tab?.tabHistory;
-    console.log(tabHistory);
     let newItemList = tabHistory.map((item) => {
       return {
         label: item.name,

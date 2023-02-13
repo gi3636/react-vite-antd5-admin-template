@@ -5,49 +5,54 @@ import { ColumnsType } from 'antd/es/table';
 
 export const columns: ColumnsType = [
   {
-    title: 'Name',
-    dataIndex: 'name',
-    width: 80,
+    title: '会员ID',
+    dataIndex: 'uid',
+    width: 10,
   },
   {
-    title: 'Age',
-    dataIndex: 'age',
-    width: 80,
+    title: '关注度',
+    dataIndex: 'attention_name',
+    width: 10,
   },
   {
-    title: '测试dress',
-    dataIndex: 'address',
-    width: 80,
+    title: '钻石余额',
+    dataIndex: 'money',
+    width: 10,
   },
   {
-    title: 'Name',
-    dataIndex: 'name',
-    width: 80,
+    title: '会员账号',
+    dataIndex: 'phone',
+    width: 10,
   },
   {
-    title: 'Age',
-    dataIndex: 'age',
-    width: 80,
+    title: '等级',
+    dataIndex: 'gradeName',
+    width: 10,
   },
   {
-    title: '测试dress',
-    dataIndex: 'address',
-    width: 80,
+    title: '会员ID',
+    dataIndex: 'uid',
+    width: 10,
   },
   {
-    title: 'Name',
-    dataIndex: 'name',
-    width: 80,
+    title: '关注度',
+    dataIndex: 'attention_name',
+    width: 10,
   },
   {
-    title: 'Age',
-    dataIndex: 'age',
-    width: 80,
+    title: '钻石余额',
+    dataIndex: 'money',
+    width: 10,
   },
   {
-    title: '测试dress',
-    dataIndex: 'address',
-    width: 80,
+    title: '会员账号',
+    dataIndex: 'phone',
+    width: 10,
+  },
+  {
+    title: '等级',
+    dataIndex: 'gradeName',
+    width: 10,
   },
 ];
 
@@ -63,12 +68,6 @@ export const searchSchema: IField[] = [
     colon: false,
     name: 'field-1',
     label: 'Field 1',
-    rules: [
-      {
-        required: true,
-        message: 'Please input your username!',
-      },
-    ],
     component: <Input placeholder='placeholder' />,
   },
 ];

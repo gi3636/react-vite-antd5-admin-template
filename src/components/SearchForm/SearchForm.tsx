@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Button, Col, Form, Row, theme } from 'antd';
 import Collapse from '@/components/SearchForm/component/collapse/CollapseBtn';
 import { FormItemProps } from 'antd/es/form/FormItem';
+import { FormInstance } from 'antd/es/form/hooks/useForm';
 
 const MAX_SHOW_ROW = 2; // 最多展示几行, 超过则折叠
 export interface IField extends FormItemProps {
@@ -13,10 +14,11 @@ export interface IField extends FormItemProps {
 interface IProps {
   searchFields: IField[];
   onFinish?: (values: any) => void;
+  handleReset?: () => void;
   loading?: boolean;
+  form?: FormInstance;
 }
-function SearchForm({ searchFields, onFinish, loading }: IProps) {
-  const [form] = Form.useForm();
+function SearchForm({ form, searchFields, onFinish, loading, handleReset }: IProps) {
   const [expand, setExpand] = useState(false);
   const [showCollapse, setShowCollapse] = useState(false);
   const { token } = theme.useToken();
@@ -72,11 +74,7 @@ function SearchForm({ searchFields, onFinish, loading }: IProps) {
           <Button type='primary' htmlType='submit' loading={loading}>
             查询
           </Button>
-          <Button
-            style={{ margin: '0 8px' }}
-            onClick={() => {
-              form.resetFields();
-            }}>
+          <Button style={{ margin: '0 8px' }} onClick={handleReset || (() => form?.resetFields())}>
             重置
           </Button>
           {showCollapse ? <Collapse expand={expand} setExpand={setExpand} /> : null}

@@ -7,6 +7,7 @@ import { useDispatch, useSelector } from '@/store';
 import logo from '@/assets/images/logo.svg';
 import { useTranslation } from 'react-i18next';
 import { globalConfig } from '@/globalConfig';
+import useLanguage from '@/hooks/useLanguage';
 const { Sider } = Layout;
 
 function PageSider({ collapsed }) {
@@ -17,10 +18,8 @@ function PageSider({ collapsed }) {
   const dispatch = useDispatch();
   const { pathname } = useLocation();
   const tab = useSelector((state) => state.tab);
-  const { t, i18n } = useTranslation();
-  const locale = useMemo(() => {
-    return i18n.resolvedLanguage;
-  }, [i18n.resolvedLanguage]);
+  const { t } = useTranslation();
+  const { locale } = useLanguage();
 
   /**
    * 初始化菜单

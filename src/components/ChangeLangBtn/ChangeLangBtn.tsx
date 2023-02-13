@@ -4,11 +4,10 @@ import { GlobalOutlined } from '@ant-design/icons';
 import { LanguageType } from '@/type';
 import { useTranslation } from 'react-i18next';
 import styles from './index.module.scss';
+import useLanguage from '@/hooks/useLanguage';
 function ChangeLangBtn(props) {
   const { i18n } = useTranslation();
-  const locale = useMemo(() => {
-    return i18n.resolvedLanguage;
-  }, [i18n.resolvedLanguage]);
+  const { locale } = useLanguage();
 
   const items: MenuProps['items'] = [
     {
