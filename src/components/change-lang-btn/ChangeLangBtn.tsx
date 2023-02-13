@@ -1,24 +1,38 @@
-import React from 'react';
-import styles from '@/components/layout/header/index.module.scss';
+import React, { useMemo } from 'react';
 import { Dropdown, MenuProps } from 'antd';
 import { GlobalOutlined } from '@ant-design/icons';
-
+import { LanguageType } from '@/type';
+import { useTranslation } from 'react-i18next';
+import styles from './index.module.scss';
 function ChangeLangBtn(props) {
+  const { t, i18n } = useTranslation();
+  const locale = useMemo(() => {
+    return i18n.resolvedLanguage;
+  }, [i18n.resolvedLanguage]);
+
   const items: MenuProps['items'] = [
     {
       key: '1',
       label: (
-        <a target='_blank' rel='noopener noreferrer' href='https://www.antgroup.com'>
+        <div
+          className={locale === LanguageType.Zh ? styles.active : ''}
+          onClick={() => {
+            i18n.changeLanguage(LanguageType.Zh);
+          }}>
           中文
-        </a>
+        </div>
       ),
     },
     {
       key: '2',
       label: (
-        <a target='_blank' rel='noopener noreferrer' href='https://www.aliyun.com'>
+        <div
+          className={locale === LanguageType.En ? styles.active : ''}
+          onClick={() => {
+            i18n.changeLanguage(LanguageType.En);
+          }}>
           English
-        </a>
+        </div>
       ),
     },
   ];

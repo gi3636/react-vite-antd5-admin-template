@@ -1,0 +1,17 @@
+.langBtn {
+  margin-left: 10px;
+  border-radius: 4px;
+  cursor: pointer;
+  padding: 10px;
+  color: #8590A6;
+
+  &:hover {
+    color: $primary-color;
+    background: rgba($primary-color, 0.1);
+  }
+}
+
+.active {
+  font-weight: bold;
+  color: $primary-color;
+}

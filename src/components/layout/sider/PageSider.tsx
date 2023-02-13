@@ -15,8 +15,8 @@ function PageSider({ collapsed }) {
   const [menuList, setMenuList] = useState([]);
   const dispatch = useDispatch();
   const { pathname } = useLocation();
-  const { t, i18n } = useTranslation();
   const tab = useSelector((state) => state.tab);
+  const { t, i18n } = useTranslation();
   const locale = useMemo(() => {
     return i18n.resolvedLanguage;
   }, [i18n.resolvedLanguage]);
