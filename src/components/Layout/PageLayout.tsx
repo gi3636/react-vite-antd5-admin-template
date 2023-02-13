@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
 import { Layout, theme } from 'antd';
 import './index.less';
-import PageSider from '@/components/layout/sider/PageSider';
-import PageHeader from '@/components/layout/header/PageHeader';
-import PageContent from '@/components/layout/content/PageContent';
-import TabPage from '@/components/layout/tag/TabPage';
+import PageSider from '@/components/Layout/sider/PageSider';
+import PageHeader from '@/components/Layout/header/PageHeader';
+import PageContent from '@/components/Layout/content/PageContent';
+import TabPage from '@/components/Layout/tag/TabPage';
 import { LeftOutlined, MenuFoldOutlined, MenuUnfoldOutlined, RightOutlined } from '@ant-design/icons';
 
 function PageLayout() {

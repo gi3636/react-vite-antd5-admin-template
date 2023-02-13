@@ -1,4 +1,4 @@
-import { IField } from '@/components/search-form/SearchForm';
+import { IField } from '@/components/SearchForm/SearchForm';
 import { Input } from 'antd';
 import React from 'react';
 import { ColumnsType } from 'antd/es/table';

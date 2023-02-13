@@ -1,6 +1,6 @@
-import PageLayout from '@/components/layout/PageLayout';
+import PageLayout from '@/components/Layout/PageLayout';
 import { lazy } from 'react';
-const ProTableDemo = lazy(() => import('@/pages/demo/pro-table-demo'));
+const ProTableDemo = lazy(() => import('@/pages/demo/ProTableDemo'));
 export const DemoRoute = {
   path: '/demo',
   meta: {

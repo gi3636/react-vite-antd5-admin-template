@@ -1,8 +1,8 @@
 import React from 'react';
 import { Layout } from 'antd';
 import styles from './index.module.scss';
-import ChangeLangBtn from '@/components/change-lang-btn/ChangeLangBtn';
-import AvatarBtn from '@/components/layout/header/component/avatar-btn/AvatarBtn';
+import ChangeLangBtn from '@/components/ChangeLangBtn/ChangeLangBtn';
+import AvatarBtn from '@/components/Layout/header/component/avatar-btn/AvatarBtn';
 import { globalConfig } from '@/globalConfig';
 import logo from '@/assets/images/logo.svg';
 

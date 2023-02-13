@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import type { TableRowSelection } from 'antd/es/table/interface';
-import ProTable, { IProTableProps } from '@/components/pro-table/ProTable';
-import { columns, searchSchema } from '@/pages/demo/pro-table-demo/tableData';
+import ProTable, { IProTableProps } from '@/components/ProTable/ProTable';
+import { columns, searchSchema } from '@/pages/demo/ProTableDemo/tableData';
 
 const ProTableDemo: React.FC = () => {
   const [selectedRowKeys, setSelectedRowKeys] = useState<React.Key[]>([]);
@@ -50,7 +50,7 @@ const ProTableDemo: React.FC = () => {
       bordered: true,
       loading,
     },
-    searchFields: searchSchema,
+    // searchFields: searchSchema,
     onSearch: onSearch,
   };
 

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Button, Col, Form, Row, theme } from 'antd';
-import Collapse from '@/components/search-form/component/collapse/CollapseBtn';
+import Collapse from '@/components/SearchForm/component/collapse/CollapseBtn';
 import { FormItemProps } from 'antd/es/form/FormItem';
 
 const MAX_SHOW_ROW = 2; // 最多展示几行, 超过则折叠

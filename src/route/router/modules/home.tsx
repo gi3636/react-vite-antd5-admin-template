@@ -1,4 +1,4 @@
-import PageLayout from '@/components/layout/PageLayout';
+import PageLayout from '@/components/Layout/PageLayout';
 import { lazy } from 'react';
 const Home = lazy(() => import('@/pages/home'));
 export const HomeRoute = {

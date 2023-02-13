@@ -1,6 +1,6 @@
 import React from 'react';
 import { Button } from 'antd';
-import '../../components/layout/index.less';
+import '../../components/Layout/index.less';
 import { useTranslation } from 'react-i18next';
 import { LanguageType } from '@/type';
 

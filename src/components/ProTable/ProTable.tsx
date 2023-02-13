@@ -1,9 +1,9 @@
 import React from 'react';
 import { Table, TableProps } from 'antd';
-import SearchForm, { IField } from '@/components/search-form/SearchForm';
+import SearchForm, { IField } from '@/components/SearchForm/SearchForm';
 import { ResizeCallbackData } from 'react-resizable';
 import { ColumnsType, ColumnType } from 'antd/es/table';
-import ResizableTitle from '@/components/pro-table/component/resizable-title/ResizableTitle';
+import ResizableTitle from '@/components/ProTable/component/resizable-title/ResizableTitle';
 
 export interface IProTableProps {
   tableProps?: TableProps<any>; // column 没有添加width属性,调整列宽会失效
