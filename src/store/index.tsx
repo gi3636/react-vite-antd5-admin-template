@@ -2,12 +2,12 @@
 import { TypedUseSelectorHook, useDispatch as _useDispatch, useSelector as _useSelector } from 'react-redux';
 import { combineReducers, configureStore } from '@reduxjs/toolkit';
 import UserReducer from './user/slice';
-import ThemeReducer from './config/slice';
+import ConfigReducer from './config/slice';
 import TabReducer from './tab/slice';
 // 合并多个reducer
 const rootReducer = combineReducers({
   user: UserReducer,
-  theme: ThemeReducer,
+  config: ConfigReducer,
   tab: TabReducer,
 });
 

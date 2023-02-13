@@ -1,10 +1,11 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import { Layout, Menu } from 'antd';
-import { findMenu, generateMenu, handleSortMenu, menus } from '@/route/menu';
+import { findMenu, generateMenu, getMenus, handleSortMenu } from '@/route/menu';
 import { useLocation, useNavigate } from 'react-router-dom';
-import { addTabHistory } from '@/store/tab/slice';
+import { addTabHistory, setTabHistory } from '@/store/tab/slice';
 import { useDispatch, useSelector } from '@/store';
 import logo from '@/assets/images/logo.svg';
+import { useTranslation } from 'react-i18next';
 const { Sider } = Layout;
 
 function PageSider({ collapsed }) {
@@ -14,22 +15,49 @@ function PageSider({ collapsed }) {
   const [menuList, setMenuList] = useState([]);
   const dispatch = useDispatch();
   const { pathname } = useLocation();
+  const { t, i18n } = useTranslation();
+  const tab = useSelector((state) => state.tab);
+  const locale = useMemo(() => {
+    return i18n.resolvedLanguage;
+  }, [i18n.resolvedLanguage]);
 
   /**
    * 初始化菜单
    */
   useEffect(() => {
+    const menus = getMenus(t);
     handleSortMenu(menus); // 排序菜单
     const menuList: any = menus.map((menu) => {
       return generateMenu(menu.menu, handleClick);
     });
     setMenuList(menuList);
-  }, []);
+    refreshTabHistory(menus);
+  }, [locale]);
+
+  /**
+   * 刷新tab记录
+   * @param menus
+   */
+  const refreshTabHistory = (menus) => {
+    let menuList = [] as any;
+    tab.tabHistory.forEach((item) => {
+      let menu = findMenu(menus, item.path);
+      if (menu) {
+        menuList.push({
+          id: menu.id,
+          path: menu.path,
+          name: menu.name,
+        });
+      }
+    });
+    dispatch(setTabHistory(menuList));
+  };
 
   /**
    * 初始化选中菜单
    */
   useEffect(() => {
+    const menus = getMenus(t);
     setOpenKeys(['/' + pathname.split('/')[1]]);
     setCurrent(pathname);
     let menu = findMenu(menus, pathname);
@@ -41,7 +69,6 @@ function PageSider({ collapsed }) {
       }),
     );
   }, []);
-
   /**
    *  当前路由变化时，更新菜单选中状态
    */
@@ -81,12 +108,9 @@ function PageSider({ collapsed }) {
 
   return (
     <Sider trigger={null} collapsible collapsed={collapsed}>
-      {/*<div className='logo'>*/}
-      {/*  <img src={logo} alt='logo' width={30} height={30} />*/}
-      {/*  <span style={{ marginLeft: 5, transitionDelay: '1s', visibility: collapsed ? 'hidden' : 'visible' }}>*/}
-      {/*    管理后台*/}
-      {/*  </span>*/}
-      {/*</div>*/}
+      <div className='logo'>
+        <img src={logo} alt='logo' width={30} height={30} />
+      </div>
       <Menu
         theme='dark'
         mode='inline'

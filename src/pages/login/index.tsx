@@ -1,10 +1,9 @@
 import React from 'react';
 import styles from './index.module.scss';
-import LoginBg from '@/assets/images/login-bg.svg';
 import { Button, Form, Input } from 'antd';
 import { LockOutlined, UserOutlined } from '@ant-design/icons';
-import Particle from '@/components/particle';
 import logo from '@/assets/images/logo.svg';
+
 const Login = () => {
   const onFinish = (values) => {
     alert(JSON.stringify(values));

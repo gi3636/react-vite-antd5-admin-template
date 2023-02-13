@@ -1,5 +1,5 @@
-import { demoMenu } from '@/route/menu/modules/demo';
-import { homeMenu } from '@/route/menu/modules/home';
+import { getDemoMenu } from '@/route/menu/modules/demo';
+import { getHomeMenu } from '@/route/menu/modules/home';
 import * as React from 'react';
 
 export interface MenuItem {
@@ -14,7 +14,10 @@ export interface MenuConfig {
   order: number; // 菜单顺序 数字越小越靠前
   menu: MenuItem;
 }
-export const menus: MenuConfig[] = [homeMenu, demoMenu];
+
+export const getMenus = (t) => {
+  return [getHomeMenu(t), getDemoMenu(t)];
+};
 
 /**
  * 生成菜单

@@ -17,7 +17,7 @@ const KeepAlive = () => {
     <div>
       {Array.from(componentList.current).map(([key, component]) => (
         <div key={key}>
-          {key === activeKey ? <div>{component}</div> : <div style={{ display: 'none' }}>{component}</div>}
+          <div style={{ display: key === activeKey ? 'block' : 'none', transition: 'all 0.3s ease' }}>{component}</div>
         </div>
       ))}
     </div>

@@ -10,9 +10,12 @@ const TabSlice = createSlice({
   name: 'tab',
   initialState,
   reducers: {
+    setTabHistory: (state, action) => {
+      const data = action.payload;
+      state.tabHistory = data;
+    },
     addTabHistory: (state, action) => {
       const data = action.payload;
-      console.log('data', data);
       if (state.tabHistory.length === 0) {
         state.tabHistory.push(data);
       }
@@ -23,11 +26,9 @@ const TabSlice = createSlice({
     },
     deleteTabHistory: (state, action) => {
       const data = action.payload;
-      console.log('data', data);
       state.tabHistory = state.tabHistory.filter((item) => item.path !== data);
-      console.log('state.tabHistory', state.tabHistory);
     },
   },
 });
-export const { addTabHistory, deleteTabHistory } = TabSlice.actions;
+export const { addTabHistory, deleteTabHistory, setTabHistory } = TabSlice.actions;
 export default TabSlice.reducer;

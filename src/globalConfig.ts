@@ -7,6 +7,7 @@ export const globalConfig = {
   // 项目名称
   projectName: '留华桥',
   // 初始主题（localStorage未设定的情况）
+  locale: 'zh',
   initTheme: {
     // 初始为亮色主题
     dark: false,
@@ -18,9 +19,6 @@ export const globalConfig = {
   // 供用户选择的主题色，如不提供该功能，则设为空数组
   customColorPrimary: ['#1677ff', '#f5222d', '#fa8c16', '#722ed1', '#13c2c2', '#52c41a'],
   // localStorage用户主题信息标识
-  SESSION_LOGIN_THEME: 'userTheme',
-  // localStorage用户登录信息标识
-  SESSION_LOGIN_INFO: 'userLoginInfo',
   uploadUrl: '',
   downloadUrl: 'https://xxxxx/',
   devBaseUrl: 'http://localhost:9999/',

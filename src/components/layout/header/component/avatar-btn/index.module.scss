@@ -1,0 +1,27 @@
+.avatarBox {
+  margin-left: auto;
+  display: flex;
+  margin-right: 5px;
+  justify-items: center;
+  align-items: center;
+  font-size: 16px;
+  padding: 3px 10px;
+  cursor: pointer;
+
+  .name {
+    margin: 0 5px;
+  }
+
+  .avatar {
+    margin-right: 10px;
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+  }
+
+  &:hover {
+    background: rgba($primary-color, 0.1);
+    border-radius: 4px;
+    color: $primary-color;
+  }
+}

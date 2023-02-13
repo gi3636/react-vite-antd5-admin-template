@@ -1,19 +1,19 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { HashRouter } from 'react-router-dom';
 import Router from '@/route';
-import enUS from 'antd/locale/en_US';
 import { ConfigProvider, theme } from 'antd';
 import { useSelector } from '@/store';
+
 const { darkAlgorithm, defaultAlgorithm } = theme;
-function App(props) {
+function App() {
   // 获取store中的主题配置
-  const globalTheme = useSelector((state: any) => state.theme);
+  const globalConfig = useSelector((state: any) => state.config);
   // Ant Design主题变量
   const antdTheme = {
     // 亮色/暗色配置
-    algorithm: globalTheme.dark ? darkAlgorithm : defaultAlgorithm,
+    algorithm: globalConfig.dark ? darkAlgorithm : defaultAlgorithm,
     token: {
-      colorPrimary: globalTheme.colorPrimary,
+      colorPrimary: globalConfig.colorPrimary,
     },
   };
   return (

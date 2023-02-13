@@ -1,12 +1,31 @@
-import React, { useState } from 'react';
-import { Layout, theme } from 'antd';
+import React from 'react';
+import { Button } from 'antd';
 import '../../components/layout/index.less';
-import PageLayout from '@/components/layout/PageLayout';
-
-const { Header, Sider, Content } = Layout;
+import { useTranslation } from 'react-i18next';
+import { LanguageType } from '@/type';
 
 const Home: React.FC = () => {
-  return <div>首页</div>;
+  const { t, i18n } = useTranslation();
+
+  return (
+    <div>
+      <Button
+        onClick={() => {
+          i18n.changeLanguage(LanguageType.Zh);
+        }}>
+        中文
+      </Button>
+      <Button
+        onClick={() => {
+          i18n.changeLanguage(LanguageType.En);
+        }}>
+        English
+      </Button>
+      {t('welcome')}
+
+      <div>{t('projectName')}</div>
+    </div>
+  );
 };
 
 export default Home;
