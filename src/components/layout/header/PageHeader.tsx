@@ -1,12 +1,11 @@
 import React from 'react';
-import { Dropdown, Layout, MenuProps } from 'antd';
+import { Layout } from 'antd';
 import styles from './index.module.scss';
-import { DownOutlined, GlobalOutlined } from '@ant-design/icons';
-import { colors } from '@/styles/colors';
 import ChangeLangBtn from '@/components/change-lang-btn/ChangeLangBtn';
 import AvatarBtn from '@/components/layout/header/component/avatar-btn/AvatarBtn';
 import { globalConfig } from '@/globalConfig';
 import logo from '@/assets/images/logo.svg';
+
 const { Header } = Layout;
 
 function PageHeader() {
@@ -15,7 +14,7 @@ function PageHeader() {
       style={{
         padding: 0,
         background: 'white',
-        height: 55,
+        height: 60,
         display: 'flex',
         alignItems: 'center',
         paddingRight: 30,

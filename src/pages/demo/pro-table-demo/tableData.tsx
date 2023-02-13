@@ -7,74 +7,47 @@ export const columns: ColumnsType = [
   {
     title: 'Name',
     dataIndex: 'name',
+    width: 80,
   },
   {
     title: 'Age',
     dataIndex: 'age',
+    width: 80,
   },
   {
     title: '测试dress',
     dataIndex: 'address',
+    width: 80,
   },
   {
-    title: 'Name22',
+    title: 'Name',
     dataIndex: 'name',
+    width: 80,
   },
   {
-    title: 'Age22',
+    title: 'Age',
     dataIndex: 'age',
+    width: 80,
   },
   {
-    title: '测试dress22',
+    title: '测试dress',
     dataIndex: 'address',
+    width: 80,
   },
   {
-    title: 'Name11',
+    title: 'Name',
     dataIndex: 'name',
+    width: 80,
   },
   {
-    title: 'Age11',
+    title: 'Age',
     dataIndex: 'age',
+    width: 80,
   },
   {
-    title: '测试dress11',
+    title: '测试dress',
     dataIndex: 'address',
-  },
-  {
-    title: 'Name11',
-    dataIndex: 'name',
-  },
-  {
-    title: 'Age11',
-    dataIndex: 'age',
-  },
-  {
-    title: '测试dress11',
-    dataIndex: 'address',
-  },
-  {
-    title: 'Name11',
-    dataIndex: 'name',
-  },
-  {
-    title: 'Age11',
-    dataIndex: 'age',
-  },
-  {
-    title: '测试dress11',
-    dataIndex: 'address',
-  },
-  {
-    title: 'Name11',
-    dataIndex: 'name',
-  },
-  {
-    title: 'Age11',
-    dataIndex: 'age',
-  },
-  {
-    title: '测试dress11',
-    dataIndex: 'address',
+    width: 80,
   },
 ];
 

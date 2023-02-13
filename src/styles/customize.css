@@ -23,6 +23,22 @@
     margin: 15px 0;
 }
 
+/*调整列宽*/
+.react-resizable {
+    position: relative;
+    background-clip: padding-box;
+}
+/*调整列宽*/
+.react-resizable-handle {
+    position: absolute;
+    right: -5px;
+    bottom: 0;
+    z-index: 1;
+    width: 10px;
+    height: 100%;
+    cursor: col-resize;
+}
+
 div::-webkit-scrollbar-thumb, html::-webkit-scrollbar-thumb {
     background-color: rgba(144, 147, 153, 0.3);
     border-radius: 8px;
