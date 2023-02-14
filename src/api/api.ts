@@ -36,10 +36,8 @@ api.interceptors.response.use(
     return res.data;
   },
   function (res) {
-    const { status, data } = res.response;
-    if (status >= 500) {
-      message.warning('网络异常');
-      return Promise.reject(res);
-    }
+    console.log('res', res);
+    message.warning('网络异常');
+    return Promise.reject(res);
   },
 );

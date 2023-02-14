@@ -1,58 +1,64 @@
 import { IField } from '@/components/SearchForm/SearchForm';
-import { Input, InputNumber } from 'antd';
+import { Button, Input, InputNumber } from 'antd';
 import React from 'react';
 import { ColumnsType } from 'antd/es/table';
+import { DeleteOutlined, EditOutlined } from '@ant-design/icons';
 
 export const columns: ColumnsType = [
   {
     title: '会员ID',
     dataIndex: 'uid',
-    width: 10,
   },
   {
     title: '关注度',
     dataIndex: 'attention_name',
-    width: 10,
   },
   {
     title: '钻石余额',
     dataIndex: 'money',
-    width: 10,
   },
   {
     title: '会员账号',
     dataIndex: 'phone',
-    width: 10,
   },
   {
     title: '等级',
     dataIndex: 'gradeName',
-    width: 10,
   },
   {
     title: '会员ID',
     dataIndex: 'uid',
-    width: 10,
   },
   {
     title: '关注度',
     dataIndex: 'attention_name',
-    width: 10,
   },
   {
     title: '钻石余额',
     dataIndex: 'money',
-    width: 10,
   },
   {
     title: '会员账号',
     dataIndex: 'phone',
-    width: 10,
   },
   {
     title: '等级',
     dataIndex: 'gradeName',
-    width: 10,
+  },
+  {
+    title: '操作',
+    key: 'operation',
+    fixed: 'right',
+    render: () => (
+      <div style={{ display: 'flex', justifyContent: 'center' }}>
+        <Button icon={<EditOutlined />} type='link'>
+          编辑
+        </Button>
+        <Button icon={<DeleteOutlined />} type='link' danger>
+          删除
+        </Button>
+      </div>
+    ),
   },
 ];
 
@@ -79,7 +85,7 @@ export const searchSchema: IField[] = [
   {
     col: 6,
     colon: false,
-    name: 'phone1',
+    name: 'phone1123123',
     label: '注册IP',
     component: <Input placeholder='placeholder' />,
   },

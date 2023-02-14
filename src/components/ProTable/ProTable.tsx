@@ -1,9 +1,10 @@
 import React, { useCallback, useMemo, useState } from 'react';
-import { Form, Table, TableProps } from 'antd';
+import { FloatButton, Form, Table, TableProps } from 'antd';
 import SearchForm, { IField } from '@/components/SearchForm/SearchForm';
 import { ResizeCallbackData } from 'react-resizable';
 import { ColumnsType, ColumnType } from 'antd/es/table';
 import ResizableTitle from '@/components/ProTable/component/ResizableTitle/ResizableTitle';
+import styles from './index.module.scss';
 
 export const defaultData = {
   list: [],
@@ -44,6 +45,9 @@ const ProTable: React.FC<IProTableProps> = ({ data, tableProps, searchFields, on
   const [currentPage, setCurrentPage] = useState(data?.page?.currentPage || 1); // 当前页
   const [pageSize, setPageSize] = useState(10); // 每页条数
   const [form] = Form.useForm();
+  const searchContainerRef = React.useRef<HTMLDivElement>(null);
+  const renderAtTopContainerRef = React.useRef<HTMLDivElement>(null);
+
   /**
    * 处理分页
    * @param page
@@ -59,7 +63,11 @@ const ProTable: React.FC<IProTableProps> = ({ data, tableProps, searchFields, on
    * 处理搜索
    * @param param
    */
-  const handleSearch = useCallback((param?) => {
+  const handleSearch = useCallback((param) => {
+    // 重置页码
+    if (param.page === undefined) {
+      setPageSize(defaultParams.page_size);
+    }
     form.validateFields().then((values) => {
       onSearch({ ...values, page: currentPage, page_size: pageSize, ...param });
     });
@@ -91,15 +99,21 @@ const ProTable: React.FC<IProTableProps> = ({ data, tableProps, searchFields, on
     };
 
   /**
-   *  设置侦听函数 用来调整列宽 **非必要情况别动**
+   *  合并列参数
    */
-  const mergeColumns: ColumnsType<any> = columns.map((col, index) => ({
-    ...col,
-    onHeaderCell: (column) => ({
-      width: (column as ColumnType<any>).width,
-      onResize: handleResize(index),
-    }),
-  }));
+  const mergeColumns: ColumnsType<any> = columns.map((col, index) => {
+    if (!col?.width) {
+      col.width = 100;
+    }
+    return {
+      ...col,
+      align: 'center',
+      onHeaderCell: (column) => ({
+        width: (column as ColumnType<any>).width,
+        onResize: handleResize(index),
+      }),
+    };
+  });
 
   /**
    * 转换数据 其实也就添加key值，因为不添加会有Key值报错
@@ -110,6 +124,7 @@ const ProTable: React.FC<IProTableProps> = ({ data, tableProps, searchFields, on
     return list.map((item, index) => {
       return {
         key: index,
+        align: 'center',
         ...item,
       };
     });
@@ -121,11 +136,7 @@ const ProTable: React.FC<IProTableProps> = ({ data, tableProps, searchFields, on
   const renderSearchForm = useMemo(() => {
     if (!searchFields) return null;
     return (
-      <div
-        style={{
-          borderRadius: 10,
-          marginBottom: 10,
-        }}>
+      <div ref={searchContainerRef} className={styles.searchFormContainer}>
         <SearchForm
           form={form}
           searchFields={searchFields}
@@ -137,10 +148,22 @@ const ProTable: React.FC<IProTableProps> = ({ data, tableProps, searchFields, on
     );
   }, [form, searchFields, handleSearch, loading]);
 
+  const renderAtTopContainer = () => {
+    return (
+      <div
+        ref={renderAtTopContainerRef}
+        className={styles.renderAtTop}
+        style={{ top: searchContainerRef?.current?.clientHeight || 0 }}>
+        {renderAtTop ? renderAtTop() : null}
+      </div>
+    );
+  };
+
   return (
-    <>
+    <div>
+      <FloatButton.BackTop />
       {renderSearchForm}
-      {renderAtTop ? renderAtTop() : null}
+      {renderAtTopContainer ? renderAtTopContainer() : null}
       <Table
         {...tableProps}
         dataSource={convertData(data?.list) || []}
@@ -148,6 +171,11 @@ const ProTable: React.FC<IProTableProps> = ({ data, tableProps, searchFields, on
           header: {
             cell: ResizableTitle,
           },
+        }}
+        sticky={{
+          //偏移 搜索表单的高度 加上 在table上方渲染的内容高度
+          offsetHeader:
+            (searchContainerRef?.current?.clientHeight || 0) + (renderAtTopContainerRef?.current?.clientHeight || 0),
         }}
         columns={mergeColumns}
         pagination={{
@@ -166,7 +194,7 @@ const ProTable: React.FC<IProTableProps> = ({ data, tableProps, searchFields, on
           x: 'max-content',
         }}
       />
-    </>
+    </div>
   );
 };
 

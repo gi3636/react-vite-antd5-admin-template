@@ -1,4 +1,4 @@
-import React, { memo, useEffect, useMemo, useRef, useState } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import { Button, Col, Form, Row, theme } from 'antd';
 import Collapse from '@/components/SearchForm/component/collapse/CollapseBtn';
 import { FormItemProps } from 'antd/es/form/FormItem';
@@ -38,6 +38,9 @@ function SearchForm({ form, searchFields, onFinish, loading, handleReset }: IPro
    */
   const getFields = useMemo(() => {
     return searchFields.map((item) => {
+      item.component = React.cloneElement(item.component, {
+        placeholder: `请输入${item.label}`,
+      });
       return (
         <Col span={item.col} key={item.name}>
           <Form.Item {...item}>{item.component}</Form.Item>
