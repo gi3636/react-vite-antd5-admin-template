@@ -2,7 +2,8 @@ import { IField } from '@/components/SearchForm/SearchForm';
 import { Button, Input, InputNumber } from 'antd';
 import React from 'react';
 import { ColumnsType } from 'antd/es/table';
-import { DeleteOutlined, EditOutlined } from '@ant-design/icons';
+import { EditOutlined } from '@ant-design/icons';
+import { emitter } from '@/utils/app-emitter';
 
 export const columns: ColumnsType = [
   {
@@ -49,14 +50,25 @@ export const columns: ColumnsType = [
     title: '操作',
     key: 'operation',
     fixed: 'right',
-    render: () => (
+    render: (value, record, index) => (
       <div style={{ display: 'flex', justifyContent: 'center' }}>
-        <Button icon={<EditOutlined />} type='link'>
+        <Button
+          icon={<EditOutlined />}
+          type='link'
+          onClick={() => {
+            emitter.fire('testShowModal', record);
+          }}>
           编辑
         </Button>
-        <Button icon={<DeleteOutlined />} type='link' danger>
-          删除
-        </Button>
+        {/*<Button*/}
+        {/*  icon={<DeleteOutlined />}*/}
+        {/*  type='link'*/}
+        {/*  danger*/}
+        {/*  onClick={() => {*/}
+        {/*    emitter.fire(EmitterType.cancelModal);*/}
+        {/*  }}>*/}
+        {/*  删除*/}
+        {/*</Button>*/}
       </div>
     ),
   },
@@ -71,9 +83,13 @@ export const searchSchema: IField[] = [
   },
   {
     col: 6,
-    colon: false,
     name: 'phone',
     label: '会员账号',
+    rules: [
+      {
+        required: true,
+      },
+    ],
     component: <Input placeholder='placeholder' />,
   },
   {
@@ -84,7 +100,6 @@ export const searchSchema: IField[] = [
   },
   {
     col: 6,
-    colon: false,
     name: 'phone1123123',
     label: '注册IP',
     component: <Input placeholder='placeholder' />,

@@ -2,8 +2,10 @@
 
 import { Emitter } from './emitter';
 
-enum EmitterType {
+export enum EmitterType {
   logout,
+  showModal,
+  cancelModal,
 }
 class AppEmitter extends Emitter {
   type = EmitterType;

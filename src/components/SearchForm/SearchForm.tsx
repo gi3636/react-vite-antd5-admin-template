@@ -12,13 +12,13 @@ export interface IField extends FormItemProps {
 }
 
 interface IProps {
-  searchFields: IField[];
+  fields: IField[];
   onFinish?: (values: any) => void;
   handleReset?: () => void;
   loading?: boolean;
   form?: FormInstance;
 }
-function SearchForm({ form, searchFields, onFinish, loading, handleReset }: IProps) {
+function SearchForm({ form, fields, onFinish, loading, handleReset }: IProps) {
   const [expand, setExpand] = useState(false);
   const [showCollapse, setShowCollapse] = useState(false);
   const { token } = theme.useToken();
@@ -31,13 +31,13 @@ function SearchForm({ form, searchFields, onFinish, loading, handleReset }: IPro
 
   useEffect(() => {
     handleShowCollapse();
-  }, [searchFields]);
+  }, [fields]);
 
   /**
    * 获取表单字段
    */
   const getFields = useMemo(() => {
-    return searchFields.map((item) => {
+    return fields.map((item) => {
       item.component = React.cloneElement(item.component, {
         placeholder: `请输入${item.label}`,
       });
@@ -47,7 +47,7 @@ function SearchForm({ form, searchFields, onFinish, loading, handleReset }: IPro
         </Col>
       );
     });
-  }, [searchFields]);
+  }, [fields]);
 
   /**
    * 判断是否展示折叠按钮
@@ -63,7 +63,7 @@ function SearchForm({ form, searchFields, onFinish, loading, handleReset }: IPro
    */
   function getExpandFields() {
     let count = 0;
-    searchFields.map((item) => {
+    fields.map((item) => {
       count += item.col;
     });
     return count;

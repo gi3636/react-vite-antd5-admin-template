@@ -139,7 +139,7 @@ const ProTable: React.FC<IProTableProps> = ({ data, tableProps, searchFields, on
       <div ref={searchContainerRef} className={styles.searchFormContainer}>
         <SearchForm
           form={form}
-          searchFields={searchFields}
+          fields={searchFields}
           onFinish={handleSearch}
           loading={loading}
           handleReset={handleReset}
