@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { memo, useEffect, useMemo, useRef, useState } from 'react';
 import { Button, Col, Form, Row, theme } from 'antd';
 import Collapse from '@/components/SearchForm/component/collapse/CollapseBtn';
 import { FormItemProps } from 'antd/es/form/FormItem';
@@ -36,7 +36,7 @@ function SearchForm({ form, searchFields, onFinish, loading, handleReset }: IPro
   /**
    * 获取表单字段
    */
-  const getFields = () => {
+  const getFields = useMemo(() => {
     return searchFields.map((item) => {
       return (
         <Col span={item.col} key={item.name}>
@@ -44,7 +44,7 @@ function SearchForm({ form, searchFields, onFinish, loading, handleReset }: IPro
         </Col>
       );
     });
-  };
+  }, [searchFields]);
 
   /**
    * 判断是否展示折叠按钮
@@ -68,7 +68,7 @@ function SearchForm({ form, searchFields, onFinish, loading, handleReset }: IPro
 
   return (
     <Form form={form} name='advanced_search' style={formStyle} onFinish={onFinish}>
-      <Row gutter={24}>{getFields()}</Row>
+      <Row gutter={24}>{getFields}</Row>
       <Row>
         <Col span={24} style={{ textAlign: 'right' }}>
           <Button type='primary' htmlType='submit' loading={loading}>

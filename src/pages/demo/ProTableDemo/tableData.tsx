@@ -1,5 +1,5 @@
 import { IField } from '@/components/SearchForm/SearchForm';
-import { Input } from 'antd';
+import { Input, InputNumber } from 'antd';
 import React from 'react';
 import { ColumnsType } from 'antd/es/table';
 
@@ -58,16 +58,29 @@ export const columns: ColumnsType = [
 
 export const searchSchema: IField[] = [
   {
-    col: 8,
-    name: 'field-0',
-    label: 'Field 0',
+    col: 6,
+    name: 'uid',
+    label: '会员ID',
+    component: <InputNumber controls={false} />,
+  },
+  {
+    col: 6,
+    colon: false,
+    name: 'phone',
+    label: '会员账号',
     component: <Input placeholder='placeholder' />,
   },
   {
-    col: 8,
+    col: 6,
+    name: 'uid1',
+    label: '手机号',
+    component: <Input placeholder='placeholder' />,
+  },
+  {
+    col: 6,
     colon: false,
-    name: 'field-1',
-    label: 'Field 1',
+    name: 'phone1',
+    label: '注册IP',
     component: <Input placeholder='placeholder' />,
   },
 ];

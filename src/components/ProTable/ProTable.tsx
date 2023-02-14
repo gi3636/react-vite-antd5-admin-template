@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useCallback, useMemo, useState } from 'react';
 import { Form, Table, TableProps } from 'antd';
 import SearchForm, { IField } from '@/components/SearchForm/SearchForm';
 import { ResizeCallbackData } from 'react-resizable';
@@ -17,6 +17,10 @@ export const defaultParams = {
   page: 1,
   page_size: 10,
 };
+
+/**
+ * 必要数据格式
+ */
 export interface DataItem {
   list: any[]; // 数据
   page?: {
@@ -31,7 +35,6 @@ export interface IProTableProps {
   tableProps?: TableProps<any>; // column 没有添加width属性,调整列宽会失效
   searchFields?: IField[]; // 搜索表单字段
   onSearch: (values: any) => void;
-
   renderAtTop?: () => React.ReactNode; // 在表格上方渲染的内容
 }
 
@@ -56,19 +59,21 @@ const ProTable: React.FC<IProTableProps> = ({ data, tableProps, searchFields, on
    * 处理搜索
    * @param param
    */
-  const handleSearch = (param?) => {
+  const handleSearch = useCallback((param?) => {
     form.validateFields().then((values) => {
       onSearch({ ...values, page: currentPage, page_size: pageSize, ...param });
     });
-  };
+  }, []);
 
   /**
    * 重置搜索处理
    */
-  const handleReset = () => {
+  const handleReset = useCallback(() => {
     form.resetFields();
-    handleSearch();
-  };
+    setCurrentPage(defaultParams.page);
+    setPageSize(defaultParams.page_size);
+    handleSearch({ page: defaultParams.page, page_size: defaultParams.page_size });
+  }, []);
 
   /**
    * 设置列宽 用来调整列宽 **非必要情况别动**
@@ -110,24 +115,31 @@ const ProTable: React.FC<IProTableProps> = ({ data, tableProps, searchFields, on
     });
   };
 
-  return (
-    <>
+  /**
+   * 渲染搜索表单 用useMemo优化性能
+   */
+  const renderSearchForm = useMemo(() => {
+    if (!searchFields) return null;
+    return (
       <div
         style={{
-          // border: '1px solid #f0f0f0',
           borderRadius: 10,
           marginBottom: 10,
         }}>
-        {searchFields ? (
-          <SearchForm
-            form={form}
-            searchFields={searchFields}
-            onFinish={handleSearch}
-            loading={loading}
-            handleReset={handleReset}
-          />
-        ) : null}
+        <SearchForm
+          form={form}
+          searchFields={searchFields}
+          onFinish={handleSearch}
+          loading={loading}
+          handleReset={handleReset}
+        />
       </div>
+    );
+  }, [form, searchFields, handleSearch, loading]);
+
+  return (
+    <>
+      {renderSearchForm}
       {renderAtTop ? renderAtTop() : null}
       <Table
         {...tableProps}
