@@ -1,10 +1,11 @@
-import React, { useCallback, useMemo, useState } from 'react';
+import React, { useCallback, useEffect, useMemo, useState } from 'react';
 import { FloatButton, Form, Table, TableProps } from 'antd';
 import SearchForm, { IField } from '@/components/SearchForm/SearchForm';
 import { ResizeCallbackData } from 'react-resizable';
 import { ColumnsType, ColumnType } from 'antd/es/table';
 import ResizableTitle from '@/components/ProTable/component/ResizableTitle/ResizableTitle';
 import styles from './index.module.scss';
+import useWatchRef from '@/hooks/useWatchRef';
 
 export const defaultData = {
   list: [],
@@ -45,8 +46,10 @@ const ProTable: React.FC<IProTableProps> = ({ data, tableProps, searchFields, on
   const [currentPage, setCurrentPage] = useState(data?.page?.currentPage || 1); // 当前页
   const [pageSize, setPageSize] = useState(10); // 每页条数
   const [form] = Form.useForm();
-  const searchContainerRef = React.useRef<HTMLDivElement>(null);
+  const searchContainerRef = React.useRef<any>(null);
   const renderAtTopContainerRef = React.useRef<HTMLDivElement>(null);
+  const [expand, setExpand] = useState(false);
+  useWatchRef(searchContainerRef);
 
   /**
    * 处理分页
@@ -77,10 +80,10 @@ const ProTable: React.FC<IProTableProps> = ({ data, tableProps, searchFields, on
    * 重置搜索处理
    */
   const handleReset = useCallback(() => {
-    form.resetFields();
     setCurrentPage(defaultParams.page);
     setPageSize(defaultParams.page_size);
     handleSearch({ page: defaultParams.page, page_size: defaultParams.page_size });
+    form.resetFields();
   }, []);
 
   /**
@@ -138,6 +141,8 @@ const ProTable: React.FC<IProTableProps> = ({ data, tableProps, searchFields, on
     return (
       <div ref={searchContainerRef} className={styles.searchFormContainer}>
         <SearchForm
+          expand={expand}
+          setExpand={setExpand}
           form={form}
           fields={searchFields}
           onFinish={handleSearch}
@@ -146,7 +151,7 @@ const ProTable: React.FC<IProTableProps> = ({ data, tableProps, searchFields, on
         />
       </div>
     );
-  }, [form, searchFields, handleSearch, loading]);
+  }, [form, searchFields, handleSearch, loading, expand]);
 
   const renderAtTopContainer = () => {
     return (
@@ -175,7 +180,7 @@ const ProTable: React.FC<IProTableProps> = ({ data, tableProps, searchFields, on
         sticky={{
           //偏移 搜索表单的高度 加上 在table上方渲染的内容高度
           offsetHeader:
-            (searchContainerRef?.current?.clientHeight || 0) + (renderAtTopContainerRef?.current?.clientHeight || 0),
+            (searchContainerRef?.current?.offsetHeight || 0) + (renderAtTopContainerRef?.current?.clientHeight || 0),
         }}
         columns={mergeColumns}
         pagination={{

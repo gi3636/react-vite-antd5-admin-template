@@ -104,4 +104,33 @@ export const searchSchema: IField[] = [
     label: '注册IP',
     component: <Input placeholder='placeholder' />,
   },
+  {
+    col: 6,
+    name: 'uid135',
+    label: '会员ID',
+    component: <InputNumber controls={false} />,
+  },
+  {
+    col: 6,
+    name: 'phone1',
+    label: '会员账号',
+    rules: [
+      {
+        required: true,
+      },
+    ],
+    component: <Input placeholder='placeholder' />,
+  },
+  {
+    col: 6,
+    name: 'uid13',
+    label: '手机号',
+    component: <Input placeholder='placeholder' />,
+  },
+  {
+    col: 6,
+    name: 'phone11231233',
+    label: '注册IP',
+    component: <Input placeholder='placeholder' />,
+  },
 ];

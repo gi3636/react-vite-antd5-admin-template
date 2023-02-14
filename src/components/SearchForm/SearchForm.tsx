@@ -4,7 +4,7 @@ import Collapse from '@/components/SearchForm/component/collapse/CollapseBtn';
 import { FormItemProps } from 'antd/es/form/FormItem';
 import { FormInstance } from 'antd/es/form/hooks/useForm';
 
-const MAX_SHOW_ROW = 2; // 最多展示几行, 超过则折叠
+const MAX_SHOW_ROW = 1; // 最多展示几行, 超过则折叠
 export interface IField extends FormItemProps {
   col: number; // 一行中占几列, 一行最多24列, 一般为8的倍数
   name: string;
@@ -17,9 +17,10 @@ interface IProps {
   handleReset?: () => void;
   loading?: boolean;
   form?: FormInstance;
+  expand?: boolean;
+  setExpand?: (expand: boolean) => void;
 }
-function SearchForm({ form, fields, onFinish, loading, handleReset }: IProps) {
-  const [expand, setExpand] = useState(false);
+function SearchForm({ form, fields, onFinish, loading, handleReset, expand, setExpand }: IProps) {
   const [showCollapse, setShowCollapse] = useState(false);
   const { token } = theme.useToken();
   const formStyle = {
@@ -37,23 +38,30 @@ function SearchForm({ form, fields, onFinish, loading, handleReset }: IProps) {
    * 获取表单字段
    */
   const getFields = useMemo(() => {
+    let count = 0;
     return fields.map((item) => {
-      item.component = React.cloneElement(item.component, {
-        placeholder: `请输入${item.label}`,
-      });
-      return (
-        <Col span={item.col} key={item.name}>
-          <Form.Item {...item}>{item.component}</Form.Item>
-        </Col>
-      );
+      //如果超过最大展示行数, 则折叠
+      if (count >= MAX_SHOW_ROW * 24 && !expand) {
+        return null;
+      } else {
+        count += item.col;
+        item.component = React.cloneElement(item.component, {
+          placeholder: `请输入${item.label}`,
+        });
+        return (
+          <Col span={item.col} key={item.name}>
+            <Form.Item {...item}>{item.component}</Form.Item>
+          </Col>
+        );
+      }
     });
-  }, [fields]);
+  }, [fields, expand]);
 
   /**
    * 判断是否展示折叠按钮
    */
   const handleShowCollapse = () => {
-    if (getExpandFields() > MAX_SHOW_ROW * 24) {
+    if (getColTotal() > MAX_SHOW_ROW * 24) {
       setShowCollapse(true);
     }
   };
@@ -61,7 +69,7 @@ function SearchForm({ form, fields, onFinish, loading, handleReset }: IProps) {
   /**
    * 获取展开的字段数
    */
-  function getExpandFields() {
+  function getColTotal() {
     let count = 0;
     fields.map((item) => {
       count += item.col;
