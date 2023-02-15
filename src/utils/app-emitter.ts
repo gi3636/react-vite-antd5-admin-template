@@ -4,8 +4,7 @@ import { Emitter } from './emitter';
 
 export enum EmitterType {
   logout,
-  showModal,
-  cancelModal,
+  forceReload,
 }
 class AppEmitter extends Emitter {
   type = EmitterType;

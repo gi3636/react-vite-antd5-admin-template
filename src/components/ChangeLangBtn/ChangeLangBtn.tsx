@@ -36,7 +36,7 @@ function ChangeLangBtn(props) {
     },
   ];
   return (
-    <div className={styles.langContainer}>
+    <div>
       <Dropdown menu={{ items }} placement='bottomRight' arrow>
         <GlobalOutlined className={styles.langBtn} style={{ fontSize: 20 }} />
       </Dropdown>

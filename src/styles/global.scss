@@ -1,2 +1,20 @@
 $primary-color: #4874ee;
 $icon-default-color: #8590A6;
+
+
+
+@mixin btn($color:$icon-default-color, $font-size: 20px, $hover: lighten($primary-color, 10%), $active: rgba($icon-default-color, 0.30)) {
+  cursor: pointer;
+  padding: 10px;
+  border-radius: 50%;
+  font-size: $font-size;
+  color: $color;
+  background: rgba($color, 0.15);
+  &:hover {
+    color: $hover;
+    background: rgba($hover, 0.1);
+  }
+  &:active {
+    background:$active
+  }
+}

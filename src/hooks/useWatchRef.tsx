@@ -1,8 +1,8 @@
-import React, { useEffect, useRef, useState } from 'react';
-import { set } from 'immutable';
+import React, { useEffect, useState } from 'react';
 
 export default function useWatchRef(ref) {
   const [refObj, setRefObj] = useState<any>(null);
+  let resize = null as any;
   const getWidthAndHeight = (e) => {
     const { width, height } = e.contentRect;
     if (width === refObj?.width && height === refObj?.height) return;
@@ -12,7 +12,7 @@ export default function useWatchRef(ref) {
 
   useEffect(() => {
     // 监听的函数
-    const resize = new ResizeObserver((e) => {
+    resize = new ResizeObserver((e) => {
       if (!Array.isArray(e) || !e.length) return;
       for (const ent of e) {
         getWidthAndHeight(ent);
@@ -22,7 +22,9 @@ export default function useWatchRef(ref) {
     resize.observe(ref?.current);
     // 及时销毁监听函数（重要!!!）
     return () => {
-      resize.unobserve(ref?.current);
+      if (ref.current) {
+        resize.unobserve(ref?.current);
+      }
     };
   });
 

@@ -5,6 +5,7 @@ import ChangeLangBtn from '@/components/ChangeLangBtn/ChangeLangBtn';
 import AvatarBtn from '@/components/Layout/header/component/avatar-btn/AvatarBtn';
 import { globalConfig } from '@/globalConfig';
 import logo from '@/assets/images/logo.svg';
+import ReloadBtn from '@/components/ReloadBtn/ReloadBtn';
 
 const { Header } = Layout;
 
@@ -27,6 +28,7 @@ function PageHeader() {
         <span style={{ marginLeft: 2 }}>{globalConfig.projectName}</span>
       </div>
       <div className={styles.rightContainer}>
+        <ReloadBtn />
         <ChangeLangBtn />
         <AvatarBtn />
       </div>
