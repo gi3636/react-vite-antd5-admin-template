@@ -1,16 +1,15 @@
 import React, { useEffect, useState } from 'react';
 import { Modal } from 'antd';
 import { emitter } from '@/utils/app-emitter';
+import { ModalProps } from 'antd/es/modal/Modal';
 
-interface Props extends React.PropsWithChildren {
+interface Props extends React.PropsWithChildren, ModalProps {
   modalKey: string; // 弹窗的唯一标识
+  modalProps?: ModalProps; //弹窗的参数
   onOK?: (...param) => void; // 点击确定按钮的回调
-  onCancel?: () => void; // 点击取消按钮的回调
-  title?: string; // 弹窗标题
-  footer?: React.ReactNode | null; // 底部按钮
   onInit?: (...param) => void; // 初始化的时候执行
 }
-const ProModal: React.FC<Props> = ({ onInit, title, onOK, onCancel, modalKey, footer, children }) => {
+const ProModal: React.FC<Props> = ({ onInit, onOK, onCancel, modalKey, footer, children, modalProps }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [data, setData] = useState(null);
   useEffect(() => {
@@ -37,7 +36,7 @@ const ProModal: React.FC<Props> = ({ onInit, title, onOK, onCancel, modalKey, fo
   };
 
   return (
-    <Modal title={title} open={isModalOpen} onOk={handleOK} onCancel={handleCancel} footer={footer}>
+    <Modal {...modalProps} open={isModalOpen} onOk={handleOK} onCancel={handleCancel}>
       {children}
     </Modal>
   );

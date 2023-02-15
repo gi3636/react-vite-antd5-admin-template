@@ -82,7 +82,7 @@ const ProTableDemo: React.FC = () => {
     <div>
       <Button onClick={handleTest}>测试</Button>
       <ProTable {...tableProps} />
-      <ProModal modalKey='test' title='编辑' onOK={handleOk} onInit={handleInit}>
+      <ProModal modalKey='test' onOK={handleOk} onInit={handleInit} modalProps={{ title: '测试' }}>
         <ProForm form={form} fields={searchSchema} />
       </ProModal>
     </div>
