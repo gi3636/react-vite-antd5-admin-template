@@ -5,6 +5,7 @@ import { Emitter } from './emitter';
 export enum EmitterType {
   logout,
   forceReload,
+  clearComponentCache,
 }
 class AppEmitter extends Emitter {
   type = EmitterType;

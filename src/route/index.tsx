@@ -1,24 +1,22 @@
 import { Suspense } from 'react'; // Suspense的作用是「划分页面中需要并发渲染的部分」
-import { Navigate, useRoutes } from 'react-router-dom';
-import routes from './router';
+import { Navigate, useLocation, useRoutes } from 'react-router-dom';
+
+import { configConstant } from '@/constant/configConstant';
+import { routes } from '@/route/router';
 // 拦截
 const RouterBeforeEach = (props: { route: any; children: any }) => {
+  // 更换网页标题
+  console.log('props?.route?.meta?.title', props?.route?.meta?.title);
   if (props?.route?.meta?.title) {
     document.title = props.route.meta.title;
   }
-  // const isLogin: boolean = !!Cookies.get('userInfo')
-  const isLogin = true;
-  if (props?.route?.meta?.isLogin) {
-    if (!isLogin) {
-      return <Navigate to={'/login'} replace />;
-    }
+  let userInfo = JSON.parse(localStorage.getItem(configConstant.USER_INFO) || '{}');
+
+  // 判断是否需要登录，没有token则跳转到登录页
+  if (props?.route?.meta?.needLogin && !userInfo?.token) {
+    return <Navigate to={'/login'} replace />;
   }
-  // const location = useLocation()
-  const location = { pathname: '' };
-  const routerKey = location.pathname;
-  if (isLogin && ['/login'].includes(routerKey)) {
-    return <Navigate to={'/'} replace />;
-  }
+
   return <Suspense>{props.children}</Suspense>;
 };
 

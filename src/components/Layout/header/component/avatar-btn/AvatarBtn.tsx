@@ -3,13 +3,21 @@ import { DownOutlined, PoweroffOutlined } from '@ant-design/icons';
 import styles from './index.module.scss';
 import { colors } from '@/styles/colors';
 import { Dropdown, MenuProps } from 'antd';
+import { useNavigate } from 'react-router-dom';
+import { configConstant } from '@/constant/configConstant';
 
 function AvatarBtn(props) {
+  const navigate = useNavigate();
+  const handleLogout = () => {
+    localStorage.removeItem(configConstant.USER_INFO);
+    navigate('/login', { replace: true });
+    console.log('退出登录');
+  };
   const items: MenuProps['items'] = [
     {
       key: '1',
       label: (
-        <div>
+        <div onClick={handleLogout}>
           <PoweroffOutlined />
           <span style={{ marginLeft: 5 }}>退出登录</span>
         </div>

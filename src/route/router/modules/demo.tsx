@@ -1,19 +1,20 @@
-import PageLayout from '@/components/Layout/PageLayout';
 import { lazy } from 'react';
+import { Route } from '@/route/router';
+const PageLayout = lazy(() => import('@/components/Layout/PageLayout'));
 const ProTableDemo = lazy(() => import('@/pages/demo/ProTableDemo'));
-export const DemoRoute = {
+export const DemoRoute: Route = {
   path: '/demo',
   meta: {
     title: '示例',
-    isLogin: true,
+    needLogin: true,
   },
   component: PageLayout,
   children: [
     {
       path: '/demo/pro-table',
       meta: {
-        title: 'test',
-        isLogin: true,
+        title: '示例',
+        needLogin: true,
       },
       component: ProTableDemo,
     },

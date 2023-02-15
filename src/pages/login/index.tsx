@@ -4,11 +4,22 @@ import { Button, Form, Input } from 'antd';
 import { LockOutlined, UserOutlined } from '@ant-design/icons';
 import logo from '@/assets/images/logo.svg';
 import { globalConfig } from '@/globalConfig';
+import { configConstant } from '@/constant/configConstant';
+import { useNavigate } from 'react-router-dom';
+import { emitter, EmitterType } from '@/utils/app-emitter';
+import { Emitter } from '@/utils/emitter';
+import { clearAllTabHistory } from '@/store/tab/slice';
+import { useDispatch } from '@/store';
 
 const Login = () => {
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+
   const onFinish = (values) => {
-    alert(JSON.stringify(values));
-    console.log('onFinish');
+    localStorage.setItem(configConstant.USER_INFO, JSON.stringify({ ...values, token: '123' }));
+    navigate('/', { replace: true });
+    emitter.fire(EmitterType.clearComponentCache);
+    dispatch(clearAllTabHistory());
   };
   return (
     <div className={styles.container}>

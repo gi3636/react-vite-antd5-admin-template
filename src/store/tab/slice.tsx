@@ -28,7 +28,10 @@ const TabSlice = createSlice({
       const data = action.payload;
       state.tabHistory = state.tabHistory.filter((item) => item.path !== data);
     },
+    clearAllTabHistory: (state) => {
+      state.tabHistory = [];
+    },
   },
 });
-export const { addTabHistory, deleteTabHistory, setTabHistory } = TabSlice.actions;
+export const { addTabHistory, deleteTabHistory, setTabHistory, clearAllTabHistory } = TabSlice.actions;
 export default TabSlice.reducer;

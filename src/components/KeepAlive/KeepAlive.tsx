@@ -1,8 +1,8 @@
-import { useRef, useEffect, useReducer, useMemo, memo, useState } from 'react';
-import { useLocation, useOutlet } from 'react-router-dom';
+import { memo, useEffect, useRef, useState } from 'react';
+import { useLocation, useNavigate, useOutlet } from 'react-router-dom';
 import useForceUpdate from '@/hooks/useForceUpdate';
 import { emitter, EmitterType } from '@/utils/app-emitter';
-import { useNavigate } from 'react-router-dom';
+
 const KeepAlive = () => {
   const outlet = useOutlet();
   const { pathname } = useLocation();
@@ -42,6 +42,12 @@ const KeepAlive = () => {
       handleReload();
     });
   }, [pathname]);
+
+  useEffect(() => {
+    emitter.singleton(EmitterType.clearComponentCache, () => {
+      componentList.current.clear();
+    });
+  });
 
   return (
     <div ref={contentRef}>
