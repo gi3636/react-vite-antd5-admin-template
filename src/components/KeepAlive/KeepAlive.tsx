@@ -8,7 +8,6 @@ const KeepAlive = () => {
   const { pathname } = useLocation();
   const componentList = useRef(new Map());
   const [activeKey, setActiveKey] = useState<string>('');
-  const contentRef = useRef(null);
   const handleForceUpdate = useForceUpdate(); //强制刷新
   const navigate = useNavigate();
 
@@ -50,7 +49,7 @@ const KeepAlive = () => {
   });
 
   return (
-    <div ref={contentRef}>
+    <div>
       {Array.from(componentList.current).map(([key, component]) => (
         <div key={key}>
           <div style={{ display: key === activeKey ? 'block' : 'none', transition: 'all 0.3s ease' }}>{component}</div>

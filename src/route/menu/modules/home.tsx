@@ -1,14 +1,12 @@
 import { HomeOutlined } from '@ant-design/icons';
-import { MenuConfig } from '@/route/menu';
+import { MenuItem } from '@/route/menu';
 
-export const getHomeMenu = (t): MenuConfig => {
+export const getHomeMenu = (t): MenuItem => {
   return {
     order: 1,
-    menu: {
-      id: 'home',
-      name: t('menu.home'),
-      path: '/',
-      icon: <HomeOutlined />,
-    },
+    id: 'home',
+    name: t('menu.home'),
+    path: '/',
+    icon: <HomeOutlined />,
   };
 };

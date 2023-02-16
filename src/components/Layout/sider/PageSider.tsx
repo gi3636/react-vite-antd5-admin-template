@@ -1,19 +1,18 @@
-import React, { useEffect, useMemo, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Layout, Menu } from 'antd';
-import { findMenu, generateMenu, getMenus, handleSortMenu } from '@/route/menu';
+import { convertMenu, findMenu, getMenus, handleSortMenu } from '@/route/menu';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { addTabHistory, setTabHistory } from '@/store/tab/slice';
 import { useDispatch, useSelector } from '@/store';
-import logo from '@/assets/images/logo.svg';
 import { useTranslation } from 'react-i18next';
 import { globalConfig } from '@/globalConfig';
 import useLanguage from '@/hooks/useLanguage';
+
 const { Sider } = Layout;
 
 function PageSider({ collapsed }) {
   const navigate = useNavigate();
   const [current, setCurrent] = useState('');
-  const [currentMenu, setCurrentMenu] = useState<any>({});
   const [openKeys, setOpenKeys] = useState(['']);
   const [menuList, setMenuList] = useState([]);
   const dispatch = useDispatch();
@@ -29,7 +28,7 @@ function PageSider({ collapsed }) {
     const menus = getMenus(t);
     handleSortMenu(menus); // 排序菜单
     const menuList: any = menus.map((menu) => {
-      return generateMenu(menu.menu, handleClick);
+      return convertMenu(menu, handleClick);
     });
     setMenuList(menuList);
     refreshTabHistory(menus);
@@ -62,14 +61,15 @@ function PageSider({ collapsed }) {
     setOpenKeys(['/' + pathname.split('/')[1]]);
     setCurrent(pathname);
     let menu = findMenu(menus, pathname);
-    setCurrentMenu(menu);
-    dispatch(
-      addTabHistory({
-        id: menu.id,
-        path: menu.path,
-        name: menu.name,
-      }),
-    );
+    if (menu) {
+      dispatch(
+        addTabHistory({
+          id: menu?.id,
+          path: menu?.path,
+          name: menu?.name,
+        }),
+      );
+    }
   }, []);
   /**
    *  当前路由变化时，更新菜单选中状态
@@ -91,7 +91,6 @@ function PageSider({ collapsed }) {
   const handleClick = (e: any) => {
     navigate(e.path);
     setCurrent(e.path);
-    setCurrentMenu(e);
     dispatch(
       addTabHistory({
         id: e.id,
@@ -105,8 +104,10 @@ function PageSider({ collapsed }) {
    * 更换标题
    */
   useEffect(() => {
-    document.title = currentMenu.name;
-  }, [currentMenu]);
+    const menus = getMenus(t);
+    let menu = findMenu(menus, pathname);
+    document.title = menu?.name || globalConfig.projectName;
+  }, [pathname]);
 
   /**
    * 菜单展开事件

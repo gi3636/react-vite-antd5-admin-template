@@ -11,10 +11,6 @@ export interface MenuItem {
   icon?: React.ReactNode;
   children?: MenuItem[];
 }
-export interface MenuConfig {
-  order: number; // 菜单顺序 数字越小越靠前
-  menu: MenuItem;
-}
 
 export const getMenus = (t) => {
   return [getHomeMenu(t), getDemoMenu(t), getSystemMenu(t)];
@@ -25,14 +21,14 @@ export const getMenus = (t) => {
  * @param menu
  * @param onClick
  */
-export function generateMenu(menu: MenuItem, onClick?: (item: MenuItem) => void) {
+export function convertMenu(menu: MenuItem, onClick?: (item: MenuItem) => void) {
   if (!menu) {
     return null;
   }
   let children: any = [];
   if (menu?.children && menu?.children.length > 0) {
     children = menu?.children.map((item) => {
-      return generateMenu(item, onClick);
+      return convertMenu(item, onClick);
     });
   }
 
@@ -59,30 +55,34 @@ export function generateMenu(menu: MenuItem, onClick?: (item: MenuItem) => void)
  * @param menus
  */
 export const handleSortMenu = (menus) => {
-  menus.sort((a, b) => {
-    return a.order - b.order;
-  });
-  menus.forEach((item) => {
-    let menu = item.menu;
+  if (!menus || menus.length === 0) {
+    return [];
+  }
+  menus.forEach((menu) => {
     if (menu?.children && menu?.children.length > 0) {
       handleSortMenu(menu.children);
     }
   });
+  return menus.sort((a, b) => {
+    return a?.order - b?.order;
+  });
 };
 
-export const findMenu = (menus: MenuConfig[], path: string): MenuItem => {
-  let menu: any;
-  menus.forEach((item) => {
-    if (item.menu.path === path) {
-      menu = item.menu;
+export const findMenu = (menus: MenuItem[], path: string): MenuItem | null => {
+  if (!menus || menus.length === 0) {
+    return null;
+  }
+  for (let i = 0; i < menus.length; i++) {
+    const item = menus[i];
+    if (item.path === path) {
+      return item;
     }
-    if (item.menu?.children && item.menu?.children.length > 0) {
-      item.menu?.children.forEach((child) => {
-        if (child.path === path) {
-          menu = child;
-        }
-      });
+    if (item.children && item.children.length > 0) {
+      const menu = findMenu(item.children, path);
+      if (menu) {
+        return menu;
+      }
     }
-  });
-  return menu;
+  }
+  return null;
 };
