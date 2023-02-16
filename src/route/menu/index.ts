@@ -1,6 +1,7 @@
+import * as React from 'react';
 import { getDemoMenu } from '@/route/menu/modules/demo';
 import { getHomeMenu } from '@/route/menu/modules/home';
-import * as React from 'react';
+import { getSystemMenu } from '@/route/menu/modules/system';
 
 export interface MenuItem {
   id: string;
@@ -16,7 +17,7 @@ export interface MenuConfig {
 }
 
 export const getMenus = (t) => {
-  return [getHomeMenu(t), getDemoMenu(t)];
+  return [getHomeMenu(t), getDemoMenu(t), getSystemMenu(t)];
 };
 
 /**

@@ -6,6 +6,10 @@ export default {
       proTableDemo: 'ProTable 示例',
       proTableDemo2: 'ProTable 示例2',
     },
+    system: {
+      title: '系统管理',
+      systemUser: '管理员列表',
+    },
   },
   login: '登录',
   title: '中文',

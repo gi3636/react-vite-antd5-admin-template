@@ -4,15 +4,23 @@ import styles from './index.module.scss';
 import { colors } from '@/styles/colors';
 import { Dropdown, MenuProps } from 'antd';
 import { useNavigate } from 'react-router-dom';
-import { configConstant } from '@/constant/configConstant';
+import { clearAllTabHistory } from '@/store/tab/slice';
+import { useDispatch, useSelector } from '@/store';
+import { emitter, EmitterType } from '@/utils/app-emitter';
+import { userLogout } from '@/store/user/slice';
 
-function AvatarBtn(props) {
+function AvatarBtn() {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const userInfo = useSelector((state) => state.user);
+
   const handleLogout = () => {
-    localStorage.removeItem(configConstant.USER_INFO);
+    dispatch(clearAllTabHistory());
+    dispatch(userLogout());
+    emitter.fire(EmitterType.clearComponentCache);
     navigate('/login', { replace: true });
-    console.log('退出登录');
   };
+
   const items: MenuProps['items'] = [
     {
       key: '1',
@@ -32,7 +40,7 @@ function AvatarBtn(props) {
           src='https://gw.alipayobjects.com/zos/rmsportal/BiazfanxmamNRoxxVxka.png'
           alt='avatar'
         />
-        <div className={styles.name}>vg</div>
+        <div className={styles.name}>{userInfo?.name}</div>
         <DownOutlined style={{ marginLeft: 7, fontSize: 12, color: colors.iconDefaultColor }} />
       </div>
     </Dropdown>

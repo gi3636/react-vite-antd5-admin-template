@@ -1,7 +1,8 @@
 import { lazy, LazyExoticComponent } from 'react';
 import { HomeRoute } from '@/route/router/modules/home';
 import { DemoRoute } from '@/route/router/modules/demo';
-
+import { SystemRoute } from '@/route/router/modules/system';
+const PageLayout = lazy(() => import('@/components/Layout/PageLayout'));
 const Login = lazy(() => import('@/pages/login'));
 const NotFound = lazy(() => import('@/pages/404'));
 export interface Route {
@@ -14,8 +15,15 @@ export interface Route {
   children?: Route[] | null;
 }
 export const routes: Route[] = [
-  HomeRoute,
-  DemoRoute,
+  {
+    path: '/',
+    meta: {
+      title: '首页',
+      needLogin: true,
+    },
+    component: PageLayout,
+    children: [HomeRoute, SystemRoute, DemoRoute],
+  },
   {
     path: '/login',
     meta: {

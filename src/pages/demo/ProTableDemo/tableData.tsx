@@ -114,11 +114,11 @@ export const searchSchema: IField[] = [
     col: 6,
     name: 'phone1',
     label: '会员账号',
-    rules: [
-      {
-        required: true,
-      },
-    ],
+    // rules: [
+    //   {
+    //     required: true,
+    //   },
+    // ],
     component: <Input placeholder='placeholder' />,
   },
   {

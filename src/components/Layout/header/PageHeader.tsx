@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Layout } from 'antd';
 import styles from './index.module.scss';
 import ChangeLangBtn from '@/components/ChangeLangBtn/ChangeLangBtn';
@@ -6,6 +6,7 @@ import AvatarBtn from '@/components/Layout/header/component/avatar-btn/AvatarBtn
 import { globalConfig } from '@/globalConfig';
 import logo from '@/assets/images/logo.svg';
 import ReloadBtn from '@/components/ReloadBtn/ReloadBtn';
+import { updateUser } from '@/store/user/slice';
 
 const { Header } = Layout;
 

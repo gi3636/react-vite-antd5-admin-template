@@ -5,7 +5,7 @@ export const getHomeMenu = (t): MenuConfig => {
   return {
     order: 1,
     menu: {
-      id: 'a0',
+      id: 'home',
       name: t('menu.home'),
       path: '/',
       icon: <HomeOutlined />,

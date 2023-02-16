@@ -1,18 +1,21 @@
-import React, { useMemo } from 'react';
+import React, { useEffect } from 'react';
 import { HashRouter } from 'react-router-dom';
 import Router from '@/route';
 import { ConfigProvider, theme } from 'antd';
-import { useSelector } from '@/store';
+import { useDispatch, useSelector } from '@/store';
 import enUS from 'antd/locale/en_US';
 import zhCN from 'antd/locale/zh_CN';
-import { useTranslation } from 'react-i18next';
 import useLanguage from '@/hooks/useLanguage';
 import { LanguageType } from '@/type';
+import { updateUser } from '@/store/user/slice';
+import { USER_INFO } from '@/constant';
+
 const { darkAlgorithm, defaultAlgorithm } = theme;
 function App() {
-  // 获取store中的主题配置
   const globalConfig = useSelector((state: any) => state.config);
+  const dispatch = useDispatch();
   const { locale } = useLanguage();
+
   // Ant Design主题变量
   const antdTheme = {
     // 亮色/暗色配置
@@ -21,6 +24,14 @@ function App() {
       colorPrimary: globalConfig.colorPrimary,
     },
   };
+
+  useEffect(() => {
+    let userInfo = localStorage.getItem(USER_INFO);
+    if (userInfo) {
+      console.log('userInfo', userInfo);
+      dispatch(updateUser(JSON.parse(userInfo)));
+    }
+  }, []);
 
   return (
     <ConfigProvider locale={locale === LanguageType.En ? enUS : zhCN} theme={antdTheme}>

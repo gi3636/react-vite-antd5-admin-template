@@ -13,6 +13,7 @@ const { Sider } = Layout;
 function PageSider({ collapsed }) {
   const navigate = useNavigate();
   const [current, setCurrent] = useState('');
+  const [currentMenu, setCurrentMenu] = useState<any>({});
   const [openKeys, setOpenKeys] = useState(['']);
   const [menuList, setMenuList] = useState([]);
   const dispatch = useDispatch();
@@ -61,6 +62,7 @@ function PageSider({ collapsed }) {
     setOpenKeys(['/' + pathname.split('/')[1]]);
     setCurrent(pathname);
     let menu = findMenu(menus, pathname);
+    setCurrentMenu(menu);
     dispatch(
       addTabHistory({
         id: menu.id,
@@ -89,6 +91,7 @@ function PageSider({ collapsed }) {
   const handleClick = (e: any) => {
     navigate(e.path);
     setCurrent(e.path);
+    setCurrentMenu(e);
     dispatch(
       addTabHistory({
         id: e.id,
@@ -97,6 +100,13 @@ function PageSider({ collapsed }) {
       }),
     );
   };
+
+  /**
+   * 更换标题
+   */
+  useEffect(() => {
+    document.title = currentMenu.name;
+  }, [currentMenu]);
 
   /**
    * 菜单展开事件

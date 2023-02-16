@@ -19,9 +19,14 @@ const ProTableDemo: React.FC = () => {
 
   const loadDataSource = async (param?) => {
     setLoading(true);
-    let { data }: any = await testApi(param);
-    setData(data);
-    setLoading(false);
+    try {
+      let { data }: any = await testApi(param);
+      setData(data);
+    } catch (error) {
+      console.log('error', error);
+    } finally {
+      setLoading(false);
+    }
   };
   const onSelectChange = (newSelectedRowKeys: React.Key[]) => {
     setSelectedRowKeys(newSelectedRowKeys);
