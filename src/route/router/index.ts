@@ -2,6 +2,8 @@ import { lazy, LazyExoticComponent } from 'react';
 import { HomeRoute } from '@/route/router/modules/home';
 import { DemoRoute } from '@/route/router/modules/demo';
 import { SystemRoute } from '@/route/router/modules/system';
+import { SubUserRoute } from '@/route/router/modules/subUser';
+import { SubAgentRoute } from '@/route/router/modules/subAgent';
 const PageLayout = lazy(() => import('@/components/Layout/PageLayout'));
 const Login = lazy(() => import('@/pages/login'));
 const NotFound = lazy(() => import('@/pages/404'));
@@ -22,7 +24,7 @@ export const routes: Route[] = [
       needLogin: true,
     },
     component: PageLayout,
-    children: [HomeRoute, SystemRoute, DemoRoute],
+    children: [HomeRoute, SystemRoute, DemoRoute, SubUserRoute, SubAgentRoute],
   },
   {
     path: '/login',

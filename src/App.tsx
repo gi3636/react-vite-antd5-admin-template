@@ -6,7 +6,7 @@ import { useDispatch, useSelector } from '@/store';
 import enUS from 'antd/locale/en_US';
 import zhCN from 'antd/locale/zh_CN';
 import useLanguage from '@/hooks/useLanguage';
-import { LanguageType } from '@/type';
+import { LanguageType } from '@/types';
 import { updateUser } from '@/store/user/slice';
 import { USER_INFO } from '@/constant';
 
@@ -28,7 +28,6 @@ function App() {
   useEffect(() => {
     let userInfo = localStorage.getItem(USER_INFO);
     if (userInfo) {
-      console.log('userInfo', userInfo);
       dispatch(updateUser(JSON.parse(userInfo)));
     }
   }, []);

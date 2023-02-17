@@ -2,6 +2,8 @@ import * as React from 'react';
 import { getDemoMenu } from '@/route/menu/modules/demo';
 import { getHomeMenu } from '@/route/menu/modules/home';
 import { getSystemMenu } from '@/route/menu/modules/system';
+import { getSubUserMenu } from '@/route/menu/modules/subUser';
+import { getSubAgent } from '@/route/menu/modules/subAgent';
 
 export interface MenuItem {
   id: string;
@@ -12,8 +14,12 @@ export interface MenuItem {
   children?: MenuItem[];
 }
 
+/**
+ * ！！！！这里新增菜单！！！！
+ * @param t
+ */
 export const getMenus = (t) => {
-  return [getHomeMenu(t), getDemoMenu(t), getSystemMenu(t)];
+  return [getHomeMenu(t), getDemoMenu(t), getSystemMenu(t), getSubUserMenu(t), getSubAgent(t)];
 };
 
 /**

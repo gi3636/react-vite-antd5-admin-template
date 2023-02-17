@@ -1,6 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { globalConfig } from '@/globalConfig';
-import { LanguageType } from '@/type';
+import { LanguageType } from '@/types';
 import { LOCALE, THEME } from '@/constant';
 
 // 先从localStorage里获取主题配置

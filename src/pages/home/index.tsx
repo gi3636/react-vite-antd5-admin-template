@@ -2,7 +2,7 @@ import React from 'react';
 import { Button } from 'antd';
 import '../../components/Layout/index.less';
 import { useTranslation } from 'react-i18next';
-import { LanguageType } from '@/type';
+import { LanguageType } from '@/types';
 
 const Home: React.FC = () => {
   const { t, i18n } = useTranslation();

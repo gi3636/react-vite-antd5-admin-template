@@ -4,7 +4,7 @@ import { createSlice } from '@reduxjs/toolkit';
 import { USER_INFO } from '@/constant';
 
 const initialState = {
-  name: 'test',
+  username: 'test',
 };
 
 const UserSlice = createSlice({

@@ -3,7 +3,7 @@ import { api } from './api';
 
 export function login(param) {
   return {
-    url: 'admin/api/login',
+    url: 'agent/v1/user/login',
     method: 'post',
     data: param,
   };

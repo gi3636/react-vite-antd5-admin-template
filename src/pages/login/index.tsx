@@ -17,7 +17,7 @@ const Login = () => {
   const { loading, run } = useRequest();
   const onFinish = async (values) => {
     const res = await run(login(values));
-    if (res && res?.code == 0) {
+    if (res && res?.code == 200) {
       localStorage.setItem('token', res?.data?.token);
       dispatch(updateUser(res.data));
       navigate('/', { replace: true });
@@ -40,11 +40,11 @@ const Login = () => {
                 className={styles.form}
                 onFinish={onFinish}
                 initialValues={{
-                  name: 'zuohao',
-                  password: 'admin123',
+                  username: '123',
+                  password: '123',
                 }}>
                 <Form.Item
-                  name='name'
+                  name='username'
                   rules={[
                     {
                       required: true,

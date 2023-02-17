@@ -1,6 +1,7 @@
 /** @format */
 import axios from 'axios';
-import { message } from 'antd';
+import { message, Modal } from 'antd';
+import { emitter } from '@/utils/app-emitter';
 
 export let api;
 api = axios.create({
@@ -20,19 +21,19 @@ api.interceptors.request.use(function (config) {
 // 响应拦截器
 api.interceptors.response.use(
   function (res) {
-    if (res.data?.code != 0) {
+    if (res.data.code == -9998) {
+      Modal.error({
+        title: '重新登录',
+        content: 'token已过期，请重新登录',
+        onOk() {
+          emitter.fire(emitter.type.logout);
+        },
+      });
+    }
+    if (res.data?.code != 200) {
       message.error(res.data.msg);
       return Promise.reject(res.data);
     }
-    // if (res.data.code === 21004) {
-    //   Modal.error({
-    //     title: '重新登录',
-    //     content: 'token已过期，请重新登录',
-    //     onOk() {
-    //       emitter.fire(emitter.type.logout);
-    //     },
-    //   });
-    // }
     return res.data;
   },
   function (res) {
