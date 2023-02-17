@@ -27,6 +27,15 @@
     margin: 15px 0;
 }
 
+.ant-menu .ant-menu-submenu-title .ant-menu-item-icon,
+.ant-menu .ant-menu-item .ant-menu-item-icon{
+    font-size: 17px;
+}
+
+.ant-form-item .ant-form-item-control-input-content,.ant-input-number-group-wrapper{
+    width: 100%;
+}
+
 /*调整列宽*/
 .react-resizable {
     position: relative;

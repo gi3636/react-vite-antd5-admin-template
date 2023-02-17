@@ -6,7 +6,6 @@ import AvatarBtn from '@/components/Layout/header/component/avatar-btn/AvatarBtn
 import { globalConfig } from '@/globalConfig';
 import logo from '@/assets/images/logo.svg';
 import ReloadBtn from '@/components/ReloadBtn/ReloadBtn';
-import { updateUser } from '@/store/user/slice';
 
 const { Header } = Layout;
 

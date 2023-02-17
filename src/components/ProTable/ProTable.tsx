@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useMemo, useState } from 'react';
+import React, { useCallback, useMemo, useState } from 'react';
 import { FloatButton, Form, Table, TableProps } from 'antd';
 import SearchForm, { IField } from '@/components/SearchForm/SearchForm';
 import { ResizeCallbackData } from 'react-resizable';
@@ -6,6 +6,8 @@ import { ColumnsType, ColumnType } from 'antd/es/table';
 import ResizableTitle from '@/components/ProTable/component/ResizableTitle/ResizableTitle';
 import styles from './index.module.scss';
 import useWatchRef from '@/hooks/useWatchRef';
+import useWindowSize from '@/hooks/useWindowSize';
+import { SizeType } from 'antd/es/config-provider/SizeContext';
 
 export const defaultData = {
   list: [],
@@ -49,18 +51,28 @@ const ProTable: React.FC<IProTableProps> = ({ data, tableProps, searchFields, on
   const searchContainerRef = React.useRef<any>(null);
   const renderAtTopContainerRef = React.useRef<HTMLDivElement>(null);
   const [expand, setExpand] = useState(false);
+  let size: SizeType = 'large';
   useWatchRef(searchContainerRef);
+  const { width } = useWindowSize();
 
+  if (width < 1700) {
+    size = 'middle';
+  } else if (width < 992) {
+    size = 'small';
+  }
   /**
    * 处理分页
    * @param page
    * @param pageSize
    */
-  const handlePageChange = (page, pageSize) => {
-    setCurrentPage(page);
-    setPageSize(pageSize);
-    handleSearch({ page, page_size: pageSize });
-  };
+  const handlePageChange = useCallback(
+    (page, pageSize) => {
+      setCurrentPage(page);
+      setPageSize(pageSize);
+      handleSearch({ page, page_size: pageSize });
+    },
+    [currentPage, pageSize],
+  );
 
   /**
    * 处理搜索
@@ -90,23 +102,30 @@ const ProTable: React.FC<IProTableProps> = ({ data, tableProps, searchFields, on
    * 设置列宽 用来调整列宽 **非必要情况别动**
    * @param index
    */
-  const handleResize =
+  const handleResize = useCallback(
     (index: number) =>
-    (_: React.SyntheticEvent<Element>, { size }: ResizeCallbackData) => {
-      const newColumns = [...columns];
-      newColumns[index] = {
-        ...newColumns[index],
-        width: size.width,
-      };
-      setColumns(newColumns);
-    };
+      (_: React.SyntheticEvent<Element>, { size }: ResizeCallbackData) => {
+        const newColumns = [...columns];
+        newColumns[index] = {
+          ...newColumns[index],
+          width: size.width,
+        };
+        setColumns(newColumns);
+      },
+    [columns],
+  );
 
   /**
    *  合并列参数
    */
   const mergeColumns: ColumnsType<any> = columns.map((col, index) => {
     if (!col?.width) {
-      col.width = 100;
+      col.width = 140;
+    }
+    if (!col?.render) {
+      col.render = (text) => {
+        return <span>{text || '-'}</span>;
+      };
     }
     return {
       ...col,
@@ -195,8 +214,10 @@ const ProTable: React.FC<IProTableProps> = ({ data, tableProps, searchFields, on
             </span>
           ),
         }}
+        size={size}
         scroll={{
           x: 'max-content',
+          y: 700,
         }}
       />
     </div>

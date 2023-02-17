@@ -1,10 +1,11 @@
-import React, { useMemo } from 'react';
+import React from 'react';
 import { Dropdown, MenuProps } from 'antd';
 import { GlobalOutlined } from '@ant-design/icons';
-import { LanguageType } from '@/type';
+import { LanguageType } from '@/types';
 import { useTranslation } from 'react-i18next';
 import styles from './index.module.scss';
 import useLanguage from '@/hooks/useLanguage';
+
 function ChangeLangBtn(props) {
   const { i18n } = useTranslation();
   const { locale } = useLanguage();

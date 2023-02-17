@@ -3,12 +3,14 @@ import { Button, Col, Form, Row, theme } from 'antd';
 import Collapse from '@/components/SearchForm/component/collapse/CollapseBtn';
 import { FormItemProps } from 'antd/es/form/FormItem';
 import { FormInstance } from 'antd/es/form/hooks/useForm';
+import { ComponentType } from '@/types';
 
 const MAX_SHOW_ROW = 1; // 最多展示几行, 超过则折叠
 export interface IField extends FormItemProps {
   col: number; // 一行中占几列, 一行最多24列, 一般为8的倍数
   name: string;
   component: React.ReactElement;
+  type?: ComponentType;
 }
 
 interface IProps {
@@ -35,6 +37,23 @@ function SearchForm({ form, fields, onFinish, loading, handleReset, expand, setE
   }, [fields]);
 
   /**
+   * 转换表单字段
+   * @param item
+   */
+  const convertField = (item: IField) => {
+    if (item.type === 'RangePicker') {
+      console.log(item.component);
+      // item.component = React.cloneElement(item.component, {
+      //   placeholder: [`请输入${item.label}开始时间`, `请输入${item.label}结束时间`],
+      // });
+    } else {
+      item.component = React.cloneElement(item.component, {
+        placeholder: `请输入${item.label}`,
+      });
+    }
+  };
+
+  /**
    * 获取表单字段
    */
   const getFields = useMemo(() => {
@@ -45,9 +64,7 @@ function SearchForm({ form, fields, onFinish, loading, handleReset, expand, setE
         return null;
       } else {
         count += item.col;
-        item.component = React.cloneElement(item.component, {
-          placeholder: `请输入${item.label}`,
-        });
+        convertField(item);
         return (
           <Col span={item.col} key={item.name}>
             <Form.Item {...item}>{item.component}</Form.Item>
