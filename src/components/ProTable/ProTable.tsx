@@ -8,6 +8,7 @@ import styles from './index.module.scss';
 import useWatchRef from '@/hooks/useWatchRef';
 import useWindowSize from '@/hooks/useWindowSize';
 import { SizeType } from 'antd/es/config-provider/SizeContext';
+import { FormInstance } from 'antd/es/form/hooks/useForm';
 
 export const defaultData = {
   list: [],
@@ -35,6 +36,7 @@ export interface DataItem {
 }
 
 export interface IProTableProps {
+  form?: FormInstance;
   data?: DataItem; // 要经过装换的数据
   tableProps?: TableProps<any>; // column 没有添加width属性,调整列宽会失效
   searchFields?: IField[]; // 搜索表单字段
@@ -42,17 +44,23 @@ export interface IProTableProps {
   renderAtTop?: () => React.ReactNode; // 在表格上方渲染的内容
 }
 
-const ProTable: React.FC<IProTableProps> = ({ data, tableProps, searchFields, onSearch, renderAtTop }) => {
+const ProTable: React.FC<IProTableProps> = ({ data, tableProps, searchFields, onSearch, renderAtTop, form }) => {
   let loading = !!tableProps?.loading;
   const [columns, setColumns] = React.useState<any>(tableProps?.columns || []);
   const [currentPage, setCurrentPage] = useState(data?.page?.currentPage || 1); // 当前页
   const [pageSize, setPageSize] = useState(10); // 每页条数
-  const [form] = Form.useForm();
+  if (!form) {
+    form = Form.useForm()[0];
+  }
   const searchContainerRef = React.useRef<any>(null);
   const renderAtTopContainerRef = React.useRef<HTMLDivElement>(null);
   const [expand, setExpand] = useState(false);
   let size: SizeType = 'large';
-  useWatchRef(searchContainerRef);
+
+  if (searchFields) {
+    useWatchRef(searchContainerRef);
+  }
+
   const { width } = useWindowSize();
 
   if (width < 1700) {
@@ -82,8 +90,9 @@ const ProTable: React.FC<IProTableProps> = ({ data, tableProps, searchFields, on
     // 重置页码
     if (param.page === undefined) {
       setPageSize(defaultParams.page_size);
+      setCurrentPage(defaultParams.page);
     }
-    form.validateFields().then((values) => {
+    form?.validateFields().then((values) => {
       onSearch({ ...values, page: currentPage, page_size: pageSize, ...param });
     });
   }, []);
@@ -95,7 +104,7 @@ const ProTable: React.FC<IProTableProps> = ({ data, tableProps, searchFields, on
     setCurrentPage(defaultParams.page);
     setPageSize(defaultParams.page_size);
     handleSearch({ page: defaultParams.page, page_size: defaultParams.page_size });
-    form.resetFields();
+    form?.resetFields();
   }, []);
 
   /**
@@ -124,6 +133,7 @@ const ProTable: React.FC<IProTableProps> = ({ data, tableProps, searchFields, on
     }
     if (!col?.render) {
       col.render = (text) => {
+        if (text === 0) return <span>0</span>;
         return <span>{text || '-'}</span>;
       };
     }

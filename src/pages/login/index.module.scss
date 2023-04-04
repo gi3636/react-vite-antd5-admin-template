@@ -14,7 +14,9 @@
     left: 20px;
     will-change: filter;
     transition: filter 300ms;
-    filter: drop-shadow(0 0 2em $primary-color);
+    //filter: drop-shadow(0 0 2em $primary-color);
+    border-radius: 10px;
+    box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.2);
   }
   .box {
     z-index: 10;
@@ -104,8 +106,8 @@
   }
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .logo {
-    animation: logo-spin infinite 20s linear;
-  }
-}
+//@media (prefers-reduced-motion: no-preference) {
+//  .logo {
+//    animation: logo-spin infinite 20s linear;
+//  }
+//}

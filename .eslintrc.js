@@ -39,5 +39,6 @@ module.exports = {
     'react-hooks/rules-of-hooks': 'off',
     '@typescript-eslint/no-explicit-any': 'off',
     'prefer-const': 'off',
+    '@typescript-eslint/ban-ts-comment': 'off',
   },
 };

@@ -3,7 +3,7 @@ import { MenuItem } from '@/route/menu';
 
 export const getSubUserMenu = (t): MenuItem => {
   return {
-    order: 3,
+    order: 2,
     id: 'subUser',
     name: '下级用户',
     path: '/subUser',

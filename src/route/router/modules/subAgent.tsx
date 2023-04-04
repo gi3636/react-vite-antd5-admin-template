@@ -1,6 +1,6 @@
 import { lazy } from 'react';
 import { Route } from '@/route/router';
-const SubAgent = lazy(() => import('@/pages/sub-agent/index'));
+const SubAgent = lazy(() => import('@/pages/subAgent/index'));
 export const SubAgentRoute: Route = {
   path: '/subAgent',
   meta: {

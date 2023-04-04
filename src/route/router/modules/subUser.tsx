@@ -1,6 +1,6 @@
 import { lazy } from 'react';
 import { Route } from '@/route/router';
-const SubUser = lazy(() => import('@/pages/sub-user'));
+const SubUser = lazy(() => import('@/pages/subUser'));
 
 export const SubUserRoute: Route = {
   path: '/subUser',

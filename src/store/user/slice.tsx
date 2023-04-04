@@ -13,10 +13,13 @@ const UserSlice = createSlice({
   reducers: {
     updateUser: (state, action) => {
       const data = action.payload;
-      localStorage.setItem(USER_INFO, JSON.stringify(data));
-      return {
+      let userInfo = {
         ...state,
         ...data,
+      };
+      localStorage.setItem(USER_INFO, JSON.stringify(userInfo));
+      return {
+        ...userInfo,
       };
     },
     userLogout: (state) => {

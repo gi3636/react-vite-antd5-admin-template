@@ -106,7 +106,7 @@ function PageSider({ collapsed }) {
   useEffect(() => {
     const menus = getMenus(t);
     let menu = findMenu(menus, pathname);
-    document.title = menu?.name || globalConfig.projectName;
+    document.title = `${menu?.name || globalConfig.projectName}-茶色代理后台`;
   }, [pathname]);
 
   /**

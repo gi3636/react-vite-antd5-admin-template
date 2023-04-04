@@ -10,6 +10,8 @@ $icon-default-color: #8590A6;
   font-size: $font-size;
   color: $color;
   background: rgba($color, 0.15);
+  transition: all .1s ease-in-out;
+
   &:hover {
     color: $hover;
     background: rgba($hover, 0.1);

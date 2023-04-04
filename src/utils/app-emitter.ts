@@ -6,6 +6,10 @@ export enum EmitterType {
   logout,
   forceReload,
   clearComponentCache,
+  updateWithdrawMethodList,
+  updateMessageList,
+  updateWalletInfo,
+  updateAgentInfo,
 }
 class AppEmitter extends Emitter {
   type = EmitterType;

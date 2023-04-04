@@ -5,7 +5,7 @@ import { colors } from '@/styles/colors';
  */
 export const globalConfig = {
   // 项目名称
-  projectName: '支付后台',
+  projectName: '代理后台',
   // 初始主题（localStorage未设定的情况）
   locale: 'zh',
   initTheme: {

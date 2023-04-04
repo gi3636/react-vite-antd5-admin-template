@@ -1,16 +1,18 @@
-import React, { useEffect, useMemo, useState } from 'react';
+import React, { Component, useEffect, useMemo, useState } from 'react';
 import { Button, Col, Form, Row, theme } from 'antd';
 import Collapse from '@/components/SearchForm/component/collapse/CollapseBtn';
 import { FormItemProps } from 'antd/es/form/FormItem';
 import { FormInstance } from 'antd/es/form/hooks/useForm';
 import { ComponentType } from '@/types';
-
+type ReactComponent = (value?: any) => React.ReactElement;
 const MAX_SHOW_ROW = 1; // 最多展示几行, 超过则折叠
 export interface IField extends FormItemProps {
   col: number; // 一行中占几列, 一行最多24列, 一般为8的倍数
   name: string;
-  component: React.ReactElement;
-  type?: ComponentType;
+  component: React.ReactElement | ReactComponent;
+  type: ComponentType;
+  colStyle?: React.CSSProperties;
+  showComponent?: (values) => boolean;
 }
 
 interface IProps {
@@ -24,6 +26,7 @@ interface IProps {
 }
 function SearchForm({ form, fields, onFinish, loading, handleReset, expand, setExpand }: IProps) {
   const [showCollapse, setShowCollapse] = useState(false);
+  const [btnCol, setBtnCol] = useState(0);
   const { token } = theme.useToken();
   const formStyle = {
     maxWidth: 'none',
@@ -34,6 +37,11 @@ function SearchForm({ form, fields, onFinish, loading, handleReset, expand, setE
 
   useEffect(() => {
     handleShowCollapse();
+    if (getColTotal() >= 24) {
+      setBtnCol(24);
+    } else {
+      setBtnCol(24 - getColTotal());
+    }
   }, [fields]);
 
   /**
@@ -41,11 +49,17 @@ function SearchForm({ form, fields, onFinish, loading, handleReset, expand, setE
    * @param item
    */
   const convertField = (item: IField) => {
+    if (typeof item.component === 'function') {
+      item.component = item.component({});
+    }
     if (item.type === 'RangePicker') {
-      console.log(item.component);
       // item.component = React.cloneElement(item.component, {
       //   placeholder: [`请输入${item.label}开始时间`, `请输入${item.label}结束时间`],
       // });
+    } else if (item.type === 'Select') {
+      item.component = React.cloneElement(item.component, {
+        placeholder: `请选择${item.label}`,
+      });
     } else {
       item.component = React.cloneElement(item.component, {
         placeholder: `请输入${item.label}`,
@@ -65,9 +79,11 @@ function SearchForm({ form, fields, onFinish, loading, handleReset, expand, setE
       } else {
         count += item.col;
         convertField(item);
+        let newItem = { ...item };
+        delete newItem.colStyle;
         return (
-          <Col span={item.col} key={item.name}>
-            <Form.Item {...item}>{item.component}</Form.Item>
+          <Col span={item.col} key={item.name} style={item?.colStyle}>
+            <Form.Item {...newItem}>{item.component}</Form.Item>
           </Col>
         );
       }
@@ -96,9 +112,9 @@ function SearchForm({ form, fields, onFinish, loading, handleReset, expand, setE
 
   return (
     <Form form={form} name='advanced_search' style={formStyle} onFinish={onFinish}>
-      <Row gutter={24}>{getFields}</Row>
-      <Row>
-        <Col span={24} style={{ textAlign: 'right' }}>
+      <Row gutter={24}>
+        {getFields}
+        <Col span={btnCol} style={{ textAlign: 'right' }}>
           <Button type='primary' htmlType='submit' loading={loading}>
             查询
           </Button>

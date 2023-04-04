@@ -5,7 +5,7 @@ const Home = lazy(() => import('@/pages/home'));
 export const HomeRoute: Route = {
   path: '/',
   meta: {
-    title: '首页1',
+    title: '首页',
     needLogin: true,
   },
   component: Home,

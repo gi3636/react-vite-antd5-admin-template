@@ -8,6 +8,7 @@ import { clearAllTabHistory } from '@/store/tab/slice';
 import { useDispatch, useSelector } from '@/store';
 import { emitter, EmitterType } from '@/utils/app-emitter';
 import { userLogout } from '@/store/user/slice';
+import DropDown from '@/components/Layout/header/component/dropdown';
 
 function AvatarBtn() {
   const navigate = useNavigate();
@@ -37,7 +38,7 @@ function AvatarBtn() {
     },
   ];
   return (
-    <Dropdown menu={{ items }} placement='bottomRight' arrow>
+    <Dropdown placement='bottomRight' arrow trigger={['click']} dropdownRender={DropDown}>
       <div className={styles.avatarBox}>
         <img
           className={styles.avatar}

@@ -4,6 +4,11 @@ import { message, Modal } from 'antd';
 import { emitter } from '@/utils/app-emitter';
 
 export let api;
+let url = import.meta.env.VITE_BASE_URL;
+if (!url.startsWith('https://')) {
+  url = 'https://' + url;
+}
+
 api = axios.create({
   baseURL: import.meta.env.VITE_BASE_URL,
   timeout: 10000,
@@ -27,8 +32,10 @@ api.interceptors.response.use(
         content: 'token已过期，请重新登录',
         onOk() {
           emitter.fire(emitter.type.logout);
+          Modal.destroyAll();
         },
       });
+      return Promise.reject(res.data);
     }
     if (res.data?.code != 200) {
       message.error(res.data.msg);

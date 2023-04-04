@@ -5,6 +5,7 @@ import { ConfigProvider, theme } from 'antd';
 import { useDispatch, useSelector } from '@/store';
 import enUS from 'antd/locale/en_US';
 import zhCN from 'antd/locale/zh_CN';
+import 'dayjs/locale/zh-cn';
 import useLanguage from '@/hooks/useLanguage';
 import { LanguageType } from '@/types';
 import { updateUser } from '@/store/user/slice';
@@ -33,7 +34,7 @@ function App() {
   }, []);
 
   return (
-    <ConfigProvider locale={locale === LanguageType.En ? enUS : zhCN} theme={antdTheme}>
+    <ConfigProvider locale={zhCN} theme={antdTheme}>
       <HashRouter>
         <Router></Router>
       </HashRouter>

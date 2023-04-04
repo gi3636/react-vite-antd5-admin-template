@@ -1,0 +1,65 @@
+.container {
+  padding: 10px;
+
+
+  .methodList {
+    padding-bottom: 10px;
+    .header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+
+      .title {
+        font-size: 14px;
+        font-weight: 700;
+      }
+
+      .count {
+        font-size: 14px;
+        color: #000000;
+      }
+    }
+
+    .body {
+      margin-top: 10px;
+      position: relative;
+
+      .item {
+        padding: 10px;
+        border: 1px solid #e5e5e5;
+        border-radius: 5px;
+        background: rgba($primary-color, 0.02);
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-bottom: 10px;
+
+        .title {
+          font-size: 14px;
+          font-weight: 700;
+        }
+
+        .content {
+          width: 100%;
+          font-size: 14px;
+          color: #000000;
+
+          .address{
+            overflow:hidden;
+            text-overflow:ellipsis;
+            white-space:nowrap;
+          }
+        }
+        .delBtn{
+          top: 0;
+          right: 5px;
+          position: absolute;
+        }
+      }
+    }
+  }
+
+  .addBtn {
+    width: 100%;
+  }
+}

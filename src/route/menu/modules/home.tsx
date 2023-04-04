@@ -5,7 +5,7 @@ export const getHomeMenu = (t): MenuItem => {
   return {
     order: 1,
     id: 'home',
-    name: t('menu.home'),
+    name: '首页',
     path: '/',
     icon: <HomeOutlined />,
   };

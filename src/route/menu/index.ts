@@ -1,9 +1,10 @@
 import * as React from 'react';
-import { getDemoMenu } from '@/route/menu/modules/demo';
 import { getHomeMenu } from '@/route/menu/modules/home';
-import { getSystemMenu } from '@/route/menu/modules/system';
 import { getSubUserMenu } from '@/route/menu/modules/subUser';
 import { getSubAgent } from '@/route/menu/modules/subAgent';
+import { getWalletWithdrawMenu } from '@/route/menu/modules/walletWithdraw';
+import { USER_INFO } from '@/constant';
+import { getStatementManageMenu } from '@/route/menu/modules/statementManage';
 
 export interface MenuItem {
   id: string;
@@ -19,7 +20,11 @@ export interface MenuItem {
  * @param t
  */
 export const getMenus = (t) => {
-  return [getHomeMenu(t), getDemoMenu(t), getSystemMenu(t), getSubUserMenu(t), getSubAgent(t)];
+  let user: any = JSON.parse(localStorage.getItem(USER_INFO) || '{}');
+  if (user?.level == 3) {
+    return [getHomeMenu(t), getSubUserMenu(t), getStatementManageMenu(t), getWalletWithdrawMenu(t)];
+  }
+  return [getHomeMenu(t), getSubUserMenu(t), getSubAgent(t), getWalletWithdrawMenu(t), getStatementManageMenu(t)];
 };
 
 /**

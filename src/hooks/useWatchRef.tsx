@@ -5,7 +5,7 @@ export default function useWatchRef(ref) {
   let resize = null as any;
   const getWidthAndHeight = (e) => {
     const { width, height } = e.contentRect;
-    if (width === refObj?.width && height === refObj?.height) return;
+    if (height === refObj?.height) return;
     console.log('e.contentRect', e.contentRect, width, height);
     setRefObj(e.contentRect);
   };

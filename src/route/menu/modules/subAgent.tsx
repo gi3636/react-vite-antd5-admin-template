@@ -4,7 +4,7 @@ import React from 'react';
 
 export const getSubAgent = (t): MenuItem => {
   return {
-    order: 1,
+    order: 3,
     id: 'subAgent',
     name: '下级代理',
     path: '/subAgent',

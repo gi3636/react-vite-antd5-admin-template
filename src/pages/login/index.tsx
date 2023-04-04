@@ -9,7 +9,6 @@ import { useDispatch } from '@/store';
 import { updateUser } from '@/store/user/slice';
 import useRequest from '@/hooks/useRequest';
 import { login } from '@/api/auth';
-import { USER_INFO } from '@/constant';
 
 const Login = () => {
   const navigate = useNavigate();
@@ -36,13 +35,7 @@ const Login = () => {
             <div className={styles.title}>{globalConfig.projectName}</div>
             <div className={styles.welcome}>欢迎回来!!!</div>
             <div>
-              <Form
-                className={styles.form}
-                onFinish={onFinish}
-                initialValues={{
-                  username: '123',
-                  password: '123',
-                }}>
+              <Form className={styles.form} onFinish={onFinish}>
                 <Form.Item
                   name='username'
                   rules={[

@@ -36,6 +36,10 @@
     width: 100%;
 }
 
+.ant-modal-root .ant-modal-wrap {
+    z-index: 1050;
+}
+
 /*调整列宽*/
 .react-resizable {
     position: relative;

@@ -1,0 +1,208 @@
+.homeWarp {
+  .mt20 {
+    margin-top: 20px;
+  }
+  .homeTitle {
+    font-size: 24px;
+    font-weight: 500;
+  }
+  .cardWarp {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-top: 20px;
+    .cardItem {
+      width: calc(16.66% - 10px);
+      text-align: center;
+      height: 120px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 15px;
+      flex-direction: column;
+      font-weight: 600;
+      border: 1px solid #ededed;
+      .itemTitle {
+        font-size: 18px;
+        color: #333333;
+        margin-bottom: 20px;
+      }
+      .itemNum {
+        font-size: 18px;
+        color: #333333;
+      }
+    }
+  }
+
+  .linkBox {
+    width: calc(50% - 20px);
+    text-align: center;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    line-height: 40px;
+    .linkCopy {
+      cursor: pointer;
+      margin-left: 20px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+
+      &:hover {
+        svg {
+          color: $primary-color;
+        }
+      }
+      .linkDesc {
+        line-height: 18px;
+        text-align: center;
+        font-size: 12px;
+      }
+    }
+    .linkContent {
+      border: 1px solid #ededed;
+      display: flex;
+      flex-grow: 1;
+      border-radius: 4px;
+      height: 40px;
+      line-height: 40px;
+      position: relative;
+      .recommendIcon {
+        position: absolute;
+        left: 0;
+        top: 0;
+        img {
+          width: 32px;
+        }
+      }
+      .itemTitle {
+        width: 120px;
+        color: #333333;
+        font-size: 15px;
+        font-weight: 500;
+        background-color: #eee;
+      }
+      .itemNum {
+        margin-left: 4%;
+        max-width: 50%;
+        // flex-grow: 1;
+        text-align: center;
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+      }
+    }
+  }
+
+  .downloadContainer {
+    border: 1px solid #ededed;
+    padding: 30px;
+    border-radius: 15px;
+    .channelHeader {
+      height: 50px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      position: relative;
+      padding-left: 10px;
+      .recommendIcon {
+        position: absolute;
+        left: -18px;
+        top: 0;
+        img {
+          width: 36px;
+        }
+      }
+      .title {
+        font-size: 24px;
+        font-weight: 500;
+        color: #fc4745;
+      }
+    }
+    .downloadWarp {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 20px;
+      .downloadLinkBox {
+        width: 600px;
+        height: 40px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        line-height: 40px;
+        .linkCopy {
+          cursor: pointer;
+          margin-left: 20px;
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          justify-content: center;
+          text-align: center;
+          &:hover {
+            svg {
+              color: $primary-color;
+            }
+          }
+          .linkDesc {
+            line-height: 18px;
+            text-align: center;
+            font-size: 12px;
+          }
+        }
+        .linkContent {
+          border: 1px solid #ededed;
+          display: flex;
+          width: 400px;
+          border-radius: 4px;
+          height: 40px;
+          line-height: 40px;
+          position: relative;
+          .recommendIcon {
+            position: absolute;
+            left: 0;
+            top: 0;
+            img {
+              width: 32px;
+            }
+          }
+          .itemTitle {
+            width: 160px;
+            text-align: center;
+            color: #333333;
+            font-size: 15px;
+            font-weight: 500;
+            background-color: #eee;
+          }
+          .itemNum {
+            padding: 0 20px;
+            text-align: center;
+            overflow: hidden;
+            white-space: nowrap;
+            text-overflow: ellipsis;
+          }
+        }
+      }
+      .tips {
+        margin-top: 50px;
+        color: #fc4745;
+      }
+    }
+  }
+
+  .domainContainer {
+    padding: 25px;
+    margin: 40px 0;
+    border-radius: 15px;
+    border: 1px solid #ededed;
+  }
+
+  .domainCardWarp {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 40px;
+    margin-top: 20px;
+    padding: 10px 50px;
+  }
+}

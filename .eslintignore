@@ -10,3 +10,4 @@
 /next.config.js
 .DS_Store
 .vscode
+/src/types/common.d.ts

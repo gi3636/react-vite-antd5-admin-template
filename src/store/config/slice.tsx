@@ -42,7 +42,6 @@ export const configSlice = createSlice({
     },
     setLocale: (state, action) => {
       state.locale = action.payload;
-      console.log('setLocale', action.payload);
       window.localStorage.setItem(LOCALE, JSON.stringify(action.payload));
     },
   },
